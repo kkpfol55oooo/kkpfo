@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>WORK BORED 🥱</title>
+  <style>
+    /* ==========================================================================
+       1. COLOR POP & MINIMAL DUAL DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      /* Dynamic theme tokens (Default: Color Pop) */
+      --c-yellow: #FFD166;
+      --c-pink: #FF477E;
+      --c-teal: #06D6A0;
+      --c-blue: #118AB2;
+      --c-purple: #7209B7;
+      --c-orange: #FF9F1C;
+      --c-dark: #1A1A24;
+      --c-bg: #FFE5EC;
+      --card-bg: #FFFFFF;
+      --header-bg: #06D6A0;
+      --text-main: #1A1A24;
+      
+      --border: 3px solid var(--c-dark);
+      --shadow: 4px 4px 0px var(--c-dark);
+      --shadow-hover: 6px 6px 0px var(--c-dark);
+      --shadow-active: 1px 1px 0px var(--c-dark);
+      
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+
+      --pattern-display: block;
+    }
+
+    /* Minimal Dual Theme Overrides */
+    body.theme-minimal {
+      --c-yellow: #F4F4F5;
+      --c-pink: #18181B;
+      --c-teal: #E4E4E7;
+      --c-blue: #27272A;
+      --c-purple: #18181B;
+      --c-orange: #3F3F46;
+      --c-dark: #09090B;
+      --c-bg: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --header-bg: #18181B;
+      --text-main: #09090B;
+
+      --border: 2px solid #18181B;
+      --shadow: 2px 2px 0px #18181B;
+      --shadow-hover: 3px 3px 0px #18181B;
+      --shadow-active: 0px 0px 0px #18181B;
+
+      background-image: none !important;
+    }
+
+    body.theme-minimal .app-header {
+      background: var(--c-pink);
+    }
+    body.theme-minimal .app-title {
+      color: #FFFFFF;
+      text-shadow: none;
+    }
+    body.theme-minimal .tab-btn {
+      background: #F4F4F5;
+      color: #18181B;
+    }
+    body.theme-minimal .tab-btn.active {
+      background: #18181B;
+      color: #FFFFFF;
+    }
+    body.theme-minimal .btn {
+      background: #F4F4F5;
+      color: #18181B;
+    }
+    body.theme-minimal .nav-item.active {
+      background: #18181B;
+      color: #FFFFFF;
+    }
+    body.theme-minimal .countdown-display {
+      color: #FFFFFF;
+      text-shadow: none;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Impact', 'Segoe UI Black', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: var(--c-bg);
+      background-image: radial-gradient(var(--c-purple) 15%, transparent 16%), radial-gradient(var(--c-pink) 15%, transparent 16%);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 12px 0;
+      overflow-x: hidden;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background: var(--card-bg);
+      min-height: 96vh;
+      position: relative;
+      border-radius: var(--radius-lg);
+      border: var(--border);
+      box-shadow: var(--shadow-hover);
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+      overflow: hidden;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    /* Confetti Canvas */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ==========================================================================
+       2. DRAWER & SIDEBAR
+       ========================================================================== */
+    .drawer-toggle-btn {
+      position: fixed;
+      left: 0;
+      top: 40%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 56px;
+      background: var(--c-yellow);
+      color: var(--text-main);
+      border: var(--border);
+      border-left: none;
+      border-radius: 0 12px 12px 0;
+      cursor: pointer;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: var(--shadow);
+      transition: all 0.15s ease;
+    }
+    .drawer-toggle-btn:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .nav-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      left: -240px;
+      width: 210px;
+      height: 100vh;
+      background: var(--c-yellow);
+      border-right: var(--border);
+      z-index: 201;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 16px;
+    }
+    .nav-drawer.active {
+      transform: translateX(240px);
+    }
+
+    .nav-header {
+      font-size: 22px;
+      font-weight: 900;
+      padding-bottom: 12px;
+      border-bottom: var(--border);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-item {
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: var(--radius-md);
+      background: #FFF;
+      border: var(--border);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 16px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+      transition: all 0.1s;
+    }
+    .nav-item.active {
+      background: var(--c-pink);
+      color: #FFF;
+    }
+
+    /* Header & Minimal Theme Switcher */
+    .app-header {
+      position: relative;
+      text-align: center;
+      padding: 12px 12px 6px 12px;
+      background: var(--header-bg);
+      border-bottom: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-switch-btn {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #FFFFFF;
+      border: var(--border);
+      border-radius: 20px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: var(--shadow);
+      user-select: none;
+      transition: all 0.15s;
+    }
+    .theme-switch-btn:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .app-title {
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--c-dark);
+      text-shadow: 2px 2px 0px #FFF;
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================================
+       3. PAGE VIEWS & CARD MODULES
+       ========================================================================== */
+    .page-view {
+      display: none;
+      padding: 14px;
+      flex: 1;
+      flex-direction: column;
+      gap: 14px;
+      overflow-y: auto;
+    }
+    .page-view.active {
+      display: flex;
+    }
+
+    .card-module {
+      background: var(--card-bg);
+      border: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Pill Tabs Header */
+    .tab-bar {
+      display: flex;
+      background: var(--c-dark);
+      padding: 4px;
+      gap: 4px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 8px 4px;
+      border: var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+      background: var(--c-orange);
+      color: var(--c-dark);
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.1s;
+    }
+    .tab-btn.active {
+      background: var(--c-yellow);
+      box-shadow: inset 0 0 0 2px var(--c-dark);
+    }
+
+    .pane-content {
+      padding: 14px;
+      display: none;
+    }
+    .pane-content.active {
+      display: block;
+    }
+
+    /* Universal Buttons & Selects */
+    .btn {
+      border: var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      background: var(--c-yellow);
+      color: var(--c-dark);
+      box-shadow: var(--shadow);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      user-select: none;
+      transition: all 0.1s;
+    }
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: var(--shadow-active);
+    }
+
+    .select-custom {
+      padding: 6px 10px;
+      border: var(--border);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      background: #FFF;
+      color: #1A1A24;
+      outline: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    /* ==========================================================================
+       4. MODULE 1 (NOW): AQUARIUM & AUDIO
+       ========================================================================== */
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: var(--border);
+      box-shadow: var(--shadow);
+    }
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .ambient-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--c-pink);
+      padding: 8px 12px;
+      border-radius: var(--radius-md);
+      border: var(--border);
+      margin-top: 8px;
+      color: #FFF;
+      font-size: 14px;
+    }
+
+    /* ==========================================================================
+       5. MODULE 2 (NOW): COUNTDOWN & HOLIDAY CALENDAR
+       ========================================================================== */
+    .countdown-dashboard {
+      background: var(--c-purple);
+      color: #FFF;
+      border: var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      margin-top: 8px;
+    }
+    .countdown-display {
+      font-size: 38px;
+      color: var(--c-yellow);
+      text-shadow: 3px 3px 0px var(--c-dark);
+      letter-spacing: 2px;
+      margin: 4px 0;
+    }
+
+    /* Calendar Grid */
+    .calendar-ctrl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .calendar-title {
+      font-size: 16px;
+      color: var(--text-main);
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .cal-head {
+      text-align: center;
+      font-size: 12px;
+      background: var(--c-blue);
+      color: #FFF;
+      padding: 4px 0;
+      border: 1.5px solid var(--c-dark);
+      border-radius: 4px;
+    }
+    .cal-day {
+      background: #FFF;
+      color: #1A1A24;
+      border: 1.5px solid var(--c-dark);
+      border-radius: var(--radius-sm);
+      height: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      position: relative;
+    }
+    .cal-day.other-month { opacity: 0.3; }
+    .cal-day.today {
+      background: var(--c-pink) !important;
+      color: #FFF;
+      font-weight: bold;
+    }
+    .cal-day.holiday {
+      background: var(--c-yellow);
+    }
+    .holiday-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--c-pink);
+      border-radius: 50%;
+      border: 1px solid var(--c-dark);
+      position: absolute;
+      bottom: 2px;
+    }
+    .calendar-legend {
+      font-size: 12px;
+      background: var(--c-teal);
+      color: #1A1A24;
+      padding: 8px;
+      border-radius: var(--radius-md);
+      border: var(--border);
+      max-height: 80px;
+      overflow-y: auto;
+    }
+
+    /* ==========================================================================
+       6. MODULE 3 (NOW): CALCULATOR & DROP STAGE
+       ========================================================================== */
+    .calc-display-wrap {
+      background: var(--c-yellow);
+      border: var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      text-align: right;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+    }
+    .calc-display {
+      color: #1A1A24;
+      font-size: 32px;
+      word-break: break-all;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .calc-keypad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .calc-btn {
+      padding: 12px 0;
+      font-size: 18px;
+      border-radius: var(--radius-md);
+      border: var(--border);
+      background: #FFF;
+      color: #1A1A24;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .calc-btn:active { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
+    .calc-btn.op { background: var(--c-orange); color: #FFF; }
+    .calc-btn.fn { background: var(--c-blue); color: #FFF; }
+    .calc-btn.span-2 { grid-column: span 2; }
+
+    /* Drop Stage */
+    .drop-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .drop-stage {
+      height: 180px;
+      border: var(--border);
+      border-radius: var(--radius-md);
+      background: var(--c-teal);
+      position: relative;
+      overflow-y: auto;
+      padding: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      gap: 4px;
+    }
+    .drop-item {
+      font-size: 22px;
+      animation: wantPop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      user-select: none;
+    }
+    @keyframes wantPop {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    /* ==========================================================================
+       7. MODULE 4 (NOW): SNAKE GAME
+       ========================================================================== */
+    .snake-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      width: 100%;
+      max-width: 280px;
+    }
+    .snake-score-badge {
+      font-size: 14px;
+      background: var(--c-yellow);
+      color: #1A1A24;
+      border: var(--border);
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+    }
+    .snake-canvas-wrap {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    canvas#snakeCanvas {
+      width: 280px;
+      height: 280px;
+      background-color: var(--c-dark);
+      border: var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+    }
+    .snake-overlay {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 280px;
+      height: 280px;
+      background: rgba(26, 26, 36, 0.9);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      gap: 10px;
+      z-index: 10;
+    }
+    .snake-overlay.hidden { display: none; }
+
+    .snake-dpad {
+      display: grid;
+      grid-template-columns: repeat(3, 44px);
+      grid-template-rows: repeat(2, 44px);
+      gap: 6px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .dbtn {
+      width: 44px;
+      height: 44px;
+      background: var(--c-yellow);
+      color: #1A1A24;
+      border: var(--border);
+      border-radius: var(--radius-md);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      user-select: none;
+    }
+    .dbtn:active { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
+    .dbtn-up { grid-column: 2; grid-row: 1; }
+    .dbtn-left { grid-column: 1; grid-row: 2; }
+    .dbtn-down { grid-column: 2; grid-row: 2; }
+    .dbtn-right { grid-column: 3; grid-row: 2; }
+
+    /* ==========================================================================
+       8. TOOLS PAGE
+       ========================================================================== */
+    .qr-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background: var(--c-yellow);
+      padding: 12px;
+      border-radius: var(--radius-md);
+      border: var(--border);
+    }
+    .qr-input {
+      width: 100%;
+      padding: 8px;
+      border: var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      outline: none;
+    }
+    #qrCanvas {
+      background: #FFF;
+      padding: 6px;
+      border: var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .tool-card {
+      background: var(--c-teal);
+      border: var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 8px;
+      text-align: center;
+      text-decoration: none;
+      color: #1A1A24;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tool-card:active { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
+
+    @media (max-width: 360px) {
+      .pane-content { padding: 8px; }
+      canvas#snakeCanvas, .snake-overlay { width: 230px; height: 230px; }
+      .calc-btn { padding: 8px 0; font-size: 16px; }
+      .countdown-display { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="app-container">
+    <!-- Drawer Toggle Button -->
+    <button class="drawer-toggle-btn" id="drawerToggle" aria-label="Toggle Drawer">🍔</button>
+
+    <!-- Navigation Drawer -->
+    <div class="nav-overlay" id="navOverlay"></div>
+    <nav class="nav-drawer" id="navDrawer">
+      <div class="nav-header">🥱 WORK BORED</div>
+      <button class="nav-item active" id="navBtnBored">
+        <span>🎮</span> GAME
+      </button>
+      <button class="nav-item" id="navBtnTools">
+        <span>🛠️</span> TOOLS
+      </button>
+    </nav>
+
+    <!-- Header Title with Theme Toggle in Top Left -->
+    <header class="app-header">
+      <button class="theme-switch-btn" id="themeSwitchBtn" title="Toggle Theme">
+        <span id="themeBtnIcon">🎨</span>
+        <span id="themeBtnText">COLOR POP</span>
+      </button>
+      <h1 class="app-title">WORK BORED 🥱</h1>
+    </header>
+
+    <!-- ==========================================================================
+       HOME PAGE
+       ========================================================================== -->
+    <main class="page-view active" id="pageBored">
+      
+      <!-- MODULE 1: AQUARIUM (Formerly Module 4) -->
+      <section class="card-module">
+        <div class="tab-bar">
+          <button class="tab-btn active" style="background:var(--c-purple); color:#FFF;">🐟 AQUARIUM</button>
+        </div>
+        <div class="pane-content active">
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/kCl3bHPcw1I" allowfullscreen></iframe>
+          </div>
+          <div class="ambient-bar">
+            <span>🔊 NOISE:</span>
+            <button class="btn" id="btnAmbientRain">🌧️</button>
+            <button class="btn" id="btnAmbientWaves">🌊</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODULE 2: COUNTDOWN & CALENDAR (Formerly Module 1) -->
+      <section class="card-module">
+        <div class="tab-bar">
+          <button class="tab-btn active" id="tab-m1-1">⏰ OFF</button>
+          <button class="tab-btn" id="tab-m1-2">📅 CAL</button>
+          <button class="tab-btn" id="tab-m1-3">🐟 LIVE</button>
+        </div>
+
+        <!-- Pane 1: Timer -->
+        <div class="pane-content active" id="pane-m1-1">
+          <div style="display:flex; justify-content:center; align-items:center; gap:6px; margin-bottom:8px;">
+            <select class="select-custom" id="selectTz">
+              <option value="Asia/Hong_Kong">🇭🇰 HK</option>
+              <option value="Asia/Taipei">🇹🇼 TW</option>
+              <option value="Asia/Tokyo">🇯🇵 JP</option>
+              <option value="Asia/Singapore">🇸🇬 SG</option>
+              <option value="America/New_York">🇺🇸 US-E</option>
+              <option value="America/Los_Angeles">🇺🇸 US-W</option>
+              <option value="Europe/London">🇬🇧 UK</option>
+              <option value="Australia/Sydney">🇦🇺 AU</option>
+            </select>
+            <select class="select-custom" id="selectHour"></select>
+            <span style="font-weight:900;">:</span>
+            <select class="select-custom" id="selectMin"></select>
+          </div>
+
+          <div class="countdown-dashboard">
+            <div class="countdown-display" id="timerOutput">00:00:00</div>
+            <div style="display:flex; justify-content:center; gap:10px; margin-top:8px;">
+              <button class="btn" id="btnStartTimer" style="background:var(--c-teal);">▶ START</button>
+              <button class="btn" id="btnStopTimer" style="background:var(--c-pink); color:#FFF;">■ STOP</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 2: Calendar -->
+        <div class="pane-content" id="pane-m1-2">
+          <div class="calendar-ctrl">
+            <button class="btn" id="calPrevBtn">‹</button>
+            <div class="calendar-title" id="calTitle">JAN 2026</div>
+            <button class="btn" id="calNextBtn">›</button>
+          </div>
+          <div style="display:flex; justify-content:center; gap:6px; margin-bottom:8px;">
+            <select class="select-custom" id="calRegionSelect" style="font-size:12px;">
+              <option value="HK">🇭🇰 HK</option>
+              <option value="TW">🇹🇼 TW</option>
+              <option value="JP">🇯🇵 JP</option>
+              <option value="SG">🇸🇬 SG</option>
+              <option value="US">🇺🇸 US</option>
+              <option value="UK">🇬🇧 UK</option>
+              <option value="AU">🇦🇺 AU</option>
+            </select>
+          </div>
+          <div class="calendar-grid" id="calGrid"></div>
+          <div class="calendar-legend">
+            <div id="legendList">🎉 NO HOLIDAYS</div>
+          </div>
+        </div>
+
+        <!-- Pane 3: Aquarium Info -->
+        <div class="pane-content" id="pane-m1-3">
+          <div style="text-align:center; padding: 12px 0;">
+            <div style="font-size:36px;">🐟👆</div>
+            <div style="font-size:14px; margin-top:4px;">CHECK AQUARIUM ABOVE</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODULE 3: CALCULATOR & DROPS (Formerly Module 2) -->
+      <section class="card-module">
+        <div class="tab-bar">
+          <button class="tab-btn active" id="tab-m2-1">🧮 CALC</button>
+          <button class="tab-btn" id="tab-m2-2">💰 WANT</button>
+        </div>
+
+        <!-- Pane 1: Calculator -->
+        <div class="pane-content active" id="pane-m2-1">
+          <div class="calc-display-wrap">
+            <div class="calc-display" id="calcDisplay">0</div>
+          </div>
+          <div class="calc-keypad">
+            <button class="calc-btn fn" onclick="handleCalcInput('AC')">C</button>
+            <button class="calc-btn fn" onclick="handleCalcInput('±')">±</button>
+            <button class="calc-btn fn" onclick="handleCalcInput('%')">%</button>
+            <button class="calc-btn op" onclick="handleCalcInput('/')">÷</button>
+
+            <button class="calc-btn" onclick="handleCalcInput('7')">7</button>
+            <button class="calc-btn" onclick="handleCalcInput('8')">8</button>
+            <button class="calc-btn" onclick="handleCalcInput('9')">9</button>
+            <button class="calc-btn op" onclick="handleCalcInput('*')">×</button>
+
+            <button class="calc-btn" onclick="handleCalcInput('4')">4</button>
+            <button class="calc-btn" onclick="handleCalcInput('5')">5</button>
+            <button class="calc-btn" onclick="handleCalcInput('6')">6</button>
+            <button class="calc-btn op" onclick="handleCalcInput('-')">−</button>
+
+            <button class="calc-btn" onclick="handleCalcInput('1')">1</button>
+            <button class="calc-btn" onclick="handleCalcInput('2')">2</button>
+            <button class="calc-btn" onclick="handleCalcInput('3')">3</button>
+            <button class="calc-btn op" onclick="handleCalcInput('+')">+</button>
+
+            <button class="calc-btn span-2" onclick="handleCalcInput('0')">0</button>
+            <button class="calc-btn" onclick="handleCalcInput('.')">.</button>
+            <button class="calc-btn op" onclick="handleCalcInput('=')">=</button>
+          </div>
+        </div>
+
+        <!-- Pane 2: Emoji Drops -->
+        <div class="pane-content" id="pane-m2-2">
+          <div class="drop-controls">
+            <input type="number" id="dropCountInput" class="select-custom" style="width:65px;" min="1" max="999" value="50">
+            <button class="btn" id="btnDropDiamond">💎</button>
+            <button class="btn" id="btnDropGold">🟨</button>
+            <button class="btn" id="btnDropCash">💵</button>
+            <button class="btn" id="btnDropCat">🐱</button>
+            <button class="btn" id="btnClearStage" style="margin-left:auto; background:var(--c-pink); color:#FFF;">🧹</button>
+          </div>
+          <div class="drop-stage" id="dropStage"></div>
+          <div style="font-size:12px; text-align:right; margin-top:4px;" id="dropCountTag">Count: 0</div>
+        </div>
+      </section>
+
+      <!-- MODULE 4: SNAKE GAME (Formerly Module 3) -->
+      <section class="card-module">
+        <div class="tab-bar">
+          <button class="tab-btn active" style="background:var(--c-teal); color:#000;">🐍 SNAKE</button>
+        </div>
+        <div class="pane-content active" style="display:flex; flex-direction:column; align-items:center;">
+          <div class="snake-header">
+            <span class="snake-score-badge" id="snakeScore">SCORE: 0</span>
+            <button class="btn" id="snakeRestartBtn">↺</button>
+          </div>
+          <div class="snake-canvas-wrap">
+            <canvas id="snakeCanvas" width="280" height="280"></canvas>
+            <div class="snake-overlay" id="snakeOverlay">
+              <div id="snakeOverlayText" style="font-size:22px;">PLAY SNAKE</div>
+              <button class="btn" id="snakeStartBtn" style="background:var(--c-teal); font-size:16px;">START</button>
+            </div>
+          </div>
+          <div class="snake-dpad">
+            <button class="dbtn dbtn-up" id="dpadUp">▲</button>
+            <button class="dbtn dbtn-left" id="dpadLeft">◀</button>
+            <button class="dbtn dbtn-down" id="dpadDown">▼</button>
+            <button class="dbtn dbtn-right" id="dpadRight">▶</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ==========================================================================
+       TOOLS PAGE
+       ========================================================================== -->
+    <main class="page-view" id="pageTools">
+      <div>
+        <button class="btn" id="toolsBackBtn">‹ BACK</button>
+      </div>
+
+      <div class="card-module" style="padding:12px;">
+        <h3 style="margin-bottom:8px; font-size:16px;">📱 QR GENERATOR</h3>
+        <div class="qr-container">
+          <input type="text" id="qrTextInput" class="qr-input" value="https://github.com">
+          <canvas id="qrCanvas" width="150" height="150"></canvas>
+          <button class="btn" id="qrDownloadBtn" style="background:var(--c-blue); color:#FFF;">💾 SAVE</button>
+        </div>
+
+        <h3 style="margin-top:16px; margin-bottom:8px; font-size:16px;">🔗 LINKS</h3>
+        <div class="tools-grid">
+          <a class="tool-card" href="https://giphy.com" target="_blank">
+            <div style="font-size:28px;">🎞️</div>
+            <div style="font-size:12px; margin-top:4px;">GIPHY</div>
+          </a>
+          <a class="tool-card" href="https://reddit.com/r/popular" target="_blank">
+            <div style="font-size:28px;">🤖</div>
+            <div style="font-size:12px; margin-top:4px;">REDDIT</div>
+          </a>
+          <a class="tool-card" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">
+            <div style="font-size:28px;">🌐</div>
+            <div style="font-size:12px; margin-top:4px;">WIKI</div>
+          </a>
+          <a class="tool-card" href="https://hackertyper.net" target="_blank">
+            <div style="font-size:28px;">💻</div>
+            <div style="font-size:12px; margin-top:4px;">HACKER</div>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    /* Theme Switching Functionality */
+    const themeSwitchBtn = document.getElementById('themeSwitchBtn');
+    const themeBtnIcon = document.getElementById('themeBtnIcon');
+    const themeBtnText = document.getElementById('themeBtnText');
+    let isMinimalTheme = false;
+
+    themeSwitchBtn.addEventListener('click', () => {
+      triggerHaptic();
+      playClickSound();
+      isMinimalTheme = !isMinimalTheme;
+      if (isMinimalTheme) {
+        document.body.classList.add('theme-minimal');
+        themeBtnIcon.textContent = '🔳';
+        themeBtnText.textContent = 'MINIMAL';
+      } else {
+        document.body.classList.remove('theme-minimal');
+        themeBtnIcon.textContent = '🎨';
+        themeBtnText.textContent = 'COLOR POP';
+      }
+    });
+
+    /* Audio System */
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    function initAudio() { if (!audioCtx) audioCtx = new AudioContext(); }
+    function playClickSound() {
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.03);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.03);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.03);
+      } catch (e) {}
+    }
+    function triggerHaptic() { if (navigator.vibrate) navigator.vibrate(8); }
+
+    let ambientNode = null, isAmbientPlaying = false, currentAmbientType = '';
+    function toggleAmbient(type) {
+      initAudio();
+      if (isAmbientPlaying && currentAmbientType === type) {
+        if (ambientNode) ambientNode.stop();
+        isAmbientPlaying = false;
+        return;
+      }
+      if (ambientNode) ambientNode.stop();
+      const bufferSize = audioCtx.sampleRate * 2;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
+
+      const whiteNoise = audioCtx.createBufferSource();
+      whiteNoise.buffer = noiseBuffer;
+      whiteNoise.loop = true;
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = type === 'rain' ? 800 : 350;
+      const gain = audioCtx.createGain();
+      gain.gain.value = 0.08;
+
+      whiteNoise.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+      whiteNoise.start();
+      ambientNode = whiteNoise;
+      isAmbientPlaying = true;
+      currentAmbientType = type;
+    }
+
+    document.getElementById('btnAmbientRain').addEventListener('click', () => { triggerHaptic(); toggleAmbient('rain'); });
+    document.getElementById('btnAmbientWaves').addEventListener('click', () => { triggerHaptic(); toggleAmbient('waves'); });
+
+    /* Confetti */
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettiParticles = [];
+    function resizeConfetti() { confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeConfetti);
+    resizeConfetti();
+
+    function fireConfetti() {
+      confettiParticles = [];
+      const colors = ['#FFD166', '#FF477E', '#06D6A0', '#118AB2', '#7209B7'];
+      for (let i = 0; i < 80; i++) {
+        confettiParticles.push({
+          x: window.innerWidth / 2, y: window.innerHeight / 2,
+          vx: (Math.random() - 0.5) * 14, vy: (Math.random() - 0.75) * 16,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size: Math.random() * 8 + 4, life: 90
+        });
+      }
+      requestAnimationFrame(renderConfetti);
+    }
+    function renderConfetti() {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confettiParticles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.3; p.life--;
+        confettiCtx.fillStyle = p.color;
+        confettiCtx.fillRect(p.x, p.y, p.size, p.size);
+      });
+      confettiParticles = confettiParticles.filter(p => p.life > 0);
+      if (confettiParticles.length > 0) requestAnimationFrame(renderConfetti);
+    }
+
+    /* Navigation & Tabs */
+    const drawerToggle = document.getElementById('drawerToggle');
+    const navDrawer = document.getElementById('navDrawer');
+    const navOverlay = document.getElementById('navOverlay');
+    const navBtnBored = document.getElementById('navBtnBored');
+    const navBtnTools = document.getElementById('navBtnTools');
+    const pageBored = document.getElementById('pageBored');
+    const pageTools = document.getElementById('pageTools');
+
+    function toggleDrawer(open) {
+      triggerHaptic();
+      if (open) { navDrawer.classList.add('active'); navOverlay.classList.add('active'); }
+      else { navDrawer.classList.remove('active'); navOverlay.classList.remove('active'); }
+    }
+    drawerToggle.addEventListener('click', () => toggleDrawer(true));
+    navOverlay.addEventListener('click', () => toggleDrawer(false));
+
+    function switchPage(page) {
+      toggleDrawer(false);
+      if (page === 'bored') {
+        pageBored.classList.add('active'); pageTools.classList.remove('active');
+        navBtnBored.classList.add('active'); navBtnTools.classList.remove('active');
+      } else {
+        pageBored.classList.remove('active'); pageTools.classList.add('active');
+        navBtnBored.classList.remove('active'); navBtnTools.classList.add('active');
+        renderQRCode();
+      }
+    }
+    navBtnBored.addEventListener('click', () => switchPage('bored'));
+    navBtnTools.addEventListener('click', () => switchPage('tools'));
+    document.getElementById('toolsBackBtn').addEventListener('click', () => switchPage('bored'));
+
+    document.querySelectorAll('.card-module').forEach(module => {
+      const tabs = module.querySelectorAll('.tab-btn');
+      const panes = module.querySelectorAll('.pane-content');
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          if (tabs.length === 1) return;
+          triggerHaptic(); playClickSound();
+          tabs.forEach(t => t.classList.remove('active'));
+          panes.forEach(p => p.classList.remove('active'));
+          tab.classList.add('active');
+          if (panes[index]) panes[index].classList.add('active');
+        });
+      });
+    });
+
+    /* Countdown & Calendar Setup */
+    const selectHour = document.getElementById('selectHour');
+    const selectMin = document.getElementById('selectMin');
+    const selectTz = document.getElementById('selectTz');
+    const timerOutput = document.getElementById('timerOutput');
+
+    for (let i = 0; i < 24; i++) {
+      const opt = document.createElement('option');
+      opt.value = i; opt.textContent = i.toString().padStart(2, '0');
+      if (i === 18) opt.selected = true;
+      selectHour.appendChild(opt);
+    }
+    for (let i = 0; i < 60; i += 5) {
+      const opt = document.createElement('option');
+      opt.value = i; opt.textContent = i.toString().padStart(2, '0');
+      selectMin.appendChild(opt);
+    }
+
+    let timerInterval = null;
+    function getTzParts(timeZone) {
+      const formatter = new Intl.DateTimeFormat('en-US', { timeZone, hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false });
+      const parts = formatter.formatToParts(new Date());
+      const res = {}; parts.forEach(p => res[p.type] = p.value);
+      return { hour: parseInt(res.hour) === 24 ? 0 : parseInt(res.hour), minute: parseInt(res.minute), second: parseInt(res.second) };
+    }
+
+    function updateCountdown() {
+      const targetH = parseInt(selectHour.value), targetM = parseInt(selectMin.value), tz = selectTz.value;
+      const tzNow = getTzParts(tz);
+      let nowSec = tzNow.hour * 3600 + tzNow.minute * 60 + tzNow.second;
+      let targetSec = targetH * 3600 + targetM * 60;
+      let diff = targetSec - nowSec;
+      if (diff <= 0) diff += 24 * 3600;
+
+      if (diff <= 0 || diff === 24 * 3600) {
+        timerOutput.textContent = "OFF WORK! 🎉";
+        fireConfetti(); return;
+      }
+      const h = Math.floor(diff / 3600), m = Math.floor((diff % 3600) / 60), s = diff % 60;
+      timerOutput.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    document.getElementById('btnStartTimer').addEventListener('click', () => {
+      triggerHaptic(); playClickSound();
+      if (timerInterval) clearInterval(timerInterval);
+      updateCountdown(); timerInterval = setInterval(updateCountdown, 1000);
+    });
+    document.getElementById('btnStopTimer').addEventListener('click', () => {
+      triggerHaptic(); playClickSound();
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = null; timerOutput.textContent = "00:00:00";
+    });
+
+    /* Calendar */
+    const calTitle = document.getElementById('calTitle');
+    const calGrid = document.getElementById('calGrid');
+    const calRegionSelect = document.getElementById('calRegionSelect');
+    const legendList = document.getElementById('legendList');
+    let calDate = new Date();
+
+    const HOLIDAYS = {
+      "HK": { "2026-01-01": "New Year", "2026-02-17": "Lunar NY", "2026-10-01": "National Day" },
+      "TW": { "2026-01-01": "New Year", "2026-02-16": "Lunar Eve" },
+      "JP": { "2026-01-01": "Gantan" },
+      "SG": { "2026-01-01": "New Year" },
+      "US": { "2026-01-01": "New Year", "2026-07-04": "July 4th", "2026-12-25": "Xmas" },
+      "UK": { "2026-01-01": "New Year" },
+      "AU": { "2026-01-01": "New Year", "2026-01-26": "AU Day" }
+    };
+    const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+    function renderCalendar() {
+      calGrid.innerHTML = '';
+      const year = calDate.getFullYear(), month = calDate.getMonth(), region = calRegionSelect.value;
+      calTitle.textContent = `${MONTHS[month]} ${year}`;
+
+      ['S','M','T','W','T','F','S'].forEach(d => {
+        const head = document.createElement('div'); head.className = 'cal-head'; head.textContent = d; calGrid.appendChild(head);
+      });
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const prevTotal = new Date(year, month, 0).getDate();
+      const today = new Date();
+      const isCurrent = today.getFullYear() === year && today.getMonth() === month;
+      const holidays = [];
+
+      for (let i = 0; i < 35; i++) {
+        const cell = document.createElement('div'); cell.className = 'cal-day';
+        let cellYear = year, cellMonth = month, dayNum;
+
+        if (i < firstDay) {
+          cell.classList.add('other-month'); dayNum = prevTotal - (firstDay - i - 1); cellMonth = month - 1;
+        } else if (i >= firstDay + totalDays) {
+          cell.classList.add('other-month'); dayNum = i - (firstDay + totalDays) + 1; cellMonth = month + 1;
+        } else {
+          dayNum = i - firstDay + 1;
+          if (isCurrent && dayNum === today.getDate()) cell.classList.add('today');
+        }
+
+        cell.textContent = dayNum;
+        const dateStr = `${cellYear}-${(cellMonth + 1).toString().padStart(2, '0')}-${dayNum.toString().padStart(2, '0')}`;
+        const regionHolidays = HOLIDAYS[region] || {};
+
+        if (regionHolidays[dateStr]) {
+          cell.classList.add('holiday');
+          const dot = document.createElement('div'); dot.className = 'holiday-dot'; cell.appendChild(dot);
+          if (cellMonth === month) holidays.push(`${dayNum}: ${regionHolidays[dateStr]}`);
+        }
+        calGrid.appendChild(cell);
+      }
+      legendList.innerHTML = holidays.length ? holidays.map(h => `🎉 ${h}`).join('<br>') : '🎉 NO HOLIDAYS';
+    }
+
+    document.getElementById('calPrevBtn').addEventListener('click', () => { calDate.setMonth(calDate.getMonth() - 1); renderCalendar(); });
+    document.getElementById('calNextBtn').addEventListener('click', () => { calDate.setMonth(calDate.getMonth() + 1); renderCalendar(); });
+    calRegionSelect.addEventListener('change', renderCalendar);
+    renderCalendar();
+
+    /* Calculator & Drops */
+    const calcDisplay = document.getElementById('calcDisplay');
+    let calcExpr = '';
+
+    function handleCalcInput(val) {
+      triggerHaptic(); playClickSound();
+      if (val === 'AC') { calcExpr = ''; calcDisplay.textContent = '0'; return; }
+      if (val === '=') {
+        try {
+          let res = Function('"use strict";return (' + calcExpr.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-') + ')')();
+          calcDisplay.textContent = res.toString().length > 8 ? res.toPrecision(5) : res;
+          calcExpr = res.toString();
+        } catch (e) { calcDisplay.textContent = 'ERR'; calcExpr = ''; }
+        return;
+      }
+      calcExpr += val; calcDisplay.textContent = calcExpr;
+    }
+
+    const dropStage = document.getElementById('dropStage');
+    const dropCountInput = document.getElementById('dropCountInput');
+    const dropCountTag = document.getElementById('dropCountTag');
+
+    function generateDrops(emoji) {
+      triggerHaptic(); playClickSound();
+      let count = parseInt(dropCountInput.value) || 50;
+      count = Math.min(Math.max(count, 1), 999);
+      const displayCount = Math.min(count, 40);
+      for (let i = 0; i < displayCount; i++) {
+        const item = document.createElement('span');
+        item.className = 'drop-item'; item.textContent = emoji;
+        dropStage.appendChild(item);
+      }
+      dropCountTag.textContent = `Count: ${dropStage.children.length}`;
+    }
+
+    document.getElementById('btnDropDiamond').addEventListener('click', () => generateDrops('💎'));
+    document.getElementById('btnDropGold').addEventListener('click', () => generateDrops('🟨'));
+    document.getElementById('btnDropCash').addEventListener('click', () => generateDrops('💵'));
+    document.getElementById('btnDropCat').addEventListener('click', () => generateDrops('🐱'));
+    document.getElementById('btnClearStage').addEventListener('click', () => {
+      triggerHaptic(); dropStage.innerHTML = ''; dropCountTag.textContent = 'Count: 0';
+    });
+
+    /* Snake Game Logic */
+    const canvas = document.getElementById('snakeCanvas');
+    const ctx = canvas.getContext('2d');
+    const snakeScore = document.getElementById('snakeScore');
+    const snakeOverlay = document.getElementById('snakeOverlay');
+    const snakeOverlayText = document.getElementById('snakeOverlayText');
+
+    const GRID = 14;
+    const TILE = canvas.width / GRID;
+    let snake = [], food = {}, dir = {x:1, y:0}, nextDir = {x:1, y:0};
+    let score = 0, gameInterval = null, isRunning = false;
+
+    function initSnake() {
+      snake = [{x:4, y:7}, {x:3, y:7}, {x:2, y:7}];
+      dir = {x:1, y:0}; nextDir = {x:1, y:0};
+      score = 0; updateScore(); spawnFood(); drawGame();
+    }
+    function updateScore() { snakeScore.textContent = `SCORE: ${score}`; }
+    function spawnFood() {
+      food = { x: Math.floor(Math.random() * GRID), y: Math.floor(Math.random() * GRID) };
+    }
+    function startGame() {
+      triggerHaptic();
+      if (isRunning) return;
+      initSnake(); isRunning = true;
+      snakeOverlay.classList.add('hidden');
+      if (gameInterval) clearInterval(gameInterval);
+      gameInterval = setInterval(stepGame, 160);
+    }
+    function gameOver() {
+      isRunning = false; clearInterval(gameInterval);
+      snakeOverlayText.textContent = `SCORE: ${score}`;
+      snakeOverlay.classList.remove('hidden');
+    }
+    function stepGame() {
+      dir = nextDir;
+      const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+      if (head.x < 0 || head.x >= GRID || head.y < 0 || head.y >= GRID || snake.some(s => s.x === head.x && s.y === head.y)) {
+        return gameOver();
+      }
+      snake.unshift(head);
+      if (head.x === food.x && head.y === food.y) {
+        score += 10; updateScore(); spawnFood();
+      } else { snake.pop(); }
+      drawGame();
+    }
+    function drawGame() {
+      ctx.fillStyle = '#1A1A24';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#FF477E';
+      ctx.fillRect(food.x * TILE + 2, food.y * TILE + 2, TILE - 4, TILE - 4);
+
+      snake.forEach((seg, idx) => {
+        ctx.fillStyle = idx === 0 ? '#06D6A0' : '#118AB2';
+        ctx.fillRect(seg.x * TILE + 1, seg.y * TILE + 1, TILE - 2, TILE - 2);
+      });
+    }
+    function changeDir(dx, dy) {
+      if (dx === -dir.x && dx !== 0) return;
+      if (dy === -dir.y && dy !== 0) return;
+      nextDir = {x: dx, y: dy};
+    }
+
+    ['dpadUp', 'dpadDown', 'dpadLeft', 'dpadRight'].forEach((id, idx) => {
+      const dirs = [{x:0,y:-1}, {x:0,y:1}, {x:-1,y:0}, {x:1,y:0}];
+      document.getElementById(id).addEventListener('click', () => {
+        triggerHaptic(); if (!isRunning) startGame();
+        changeDir(dirs[idx].x, dirs[idx].y);
+      });
+    });
+
+    document.getElementById('snakeStartBtn').addEventListener('click', startGame);
+    document.getElementById('snakeRestartBtn').addEventListener('click', startGame);
+
+    /* QR Code */
+    function renderQRCode() {
+      const qrCanvas = document.getElementById('qrCanvas');
+      const ctx = qrCanvas.getContext('2d');
+      const text = document.getElementById('qrTextInput').value || 'https://github.com';
+      ctx.fillStyle = '#FFF'; ctx.fillRect(0, 0, qrCanvas.width, qrCanvas.height);
+      ctx.fillStyle = '#1A1A24';
+      const size = 15; const cell = qrCanvas.width / size;
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          if ((r < 4 && c < 4) || (r < 4 && c > size - 5) || (r > size - 5 && c < 4) || (r + c + text.length) % 3 === 0) {
+            ctx.fillRect(c * cell, r * cell, cell - 1, cell - 1);
+          }
+        }
+      }
+    }
+    document.getElementById('qrTextInput').addEventListener('input', renderQRCode);
+    document.getElementById('qrDownloadBtn').addEventListener('click', () => {
+      triggerHaptic();
+      const link = document.createElement('a');
+      link.download = 'qr.png';
+      link.href = document.getElementById('qrCanvas').toDataURL();
+      link.click();
+    });
+
+    initSnake();
+  </script>
+</body>
+</html>
