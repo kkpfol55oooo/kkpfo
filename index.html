@@ -648,7 +648,65 @@
     .dbtn-right { grid-column: 3; grid-row: 2; }
 
     /* ==========================================================================
-       8. TOOLS PAGE
+       8. NEW MODULE 5: HK AI & ECO NEWS
+       ========================================================================== */
+    .news-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+    .news-card {
+      background: #FFF;
+      border: var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      box-shadow: 2px 2px 0px var(--c-dark);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: transform 0.1s;
+    }
+    .news-card:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--c-dark);
+    }
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #555;
+    }
+    .news-source {
+      background: var(--c-yellow);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--c-dark);
+      font-weight: bold;
+    }
+    .news-tag-ai { background: var(--c-teal); }
+    .news-tag-eco { background: var(--c-orange); color: #FFF; }
+    .news-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--text-main);
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    .news-title:hover {
+      color: var(--c-pink);
+    }
+    .news-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    /* ==========================================================================
+       9. TOOLS PAGE
        ========================================================================== */
     .qr-container {
       display: flex;
@@ -711,7 +769,7 @@
   <canvas id="confettiCanvas"></canvas>
 
   <div class="app-container">
-    <!-- Drawer Toggle Button (已修改為 🐟) -->
+    <!-- Drawer Toggle Button -->
     <button class="drawer-toggle-btn" id="drawerToggle" aria-label="Toggle Drawer">🐟</button>
 
     <!-- Navigation Drawer -->
@@ -740,10 +798,10 @@
        ========================================================================== -->
     <main class="page-view active" id="pageBored">
       
-      <!-- MODULE 1: AQUARIUM (Formerly Module 4) -->
+      <!-- MODULE 1: AQUARIUM -->
       <section class="card-module">
         <div class="tab-bar">
-          <button class="tab-btn active" style="background:var(--c-purple); color:#FFF;">🐟 AQUARIUM</button>
+          <button class="tab-btn active" style="background:var(--c-purple); color:#FFF;">🐟 AquaRium </button>
         </div>
         <div class="pane-content active">
           <div class="video-wrap">
@@ -757,12 +815,12 @@
         </div>
       </section>
 
-      <!-- MODULE 2: COUNTDOWN & CALENDAR (Formerly Module 1) -->
+      <!-- MODULE 2: COUNTDOWN & CALENDAR -->
       <section class="card-module">
         <div class="tab-bar">
           <button class="tab-btn active" id="tab-m1-1">⏰ OFF</button>
-          <button class="tab-btn" id="tab-m1-2">📅 CAL</button>
-          <button class="tab-btn" id="tab-m1-3">🐟 LIVE</button>
+          <button class="tab-btn" id="tab-m1-2">📅 DAY</button>
+          <button class="tab-btn" id="tab-m1-3">🐟 ？</button>
         </div>
 
         <!-- Pane 1: Timer -->
@@ -825,11 +883,11 @@
         </div>
       </section>
 
-      <!-- MODULE 3: CALCULATOR & DROPS (Formerly Module 2) -->
+      <!-- MODULE 3: CALCULATOR & DROPS -->
       <section class="card-module">
         <div class="tab-bar">
-          <button class="tab-btn active" id="tab-m2-1">🧮 CALC</button>
-          <button class="tab-btn" id="tab-m2-2">💰 WANT</button>
+          <button class="tab-btn active" id="tab-m2-1">🧮 CAL</button>
+          <button class="tab-btn" id="tab-m2-2">💰 MONEY</button>
         </div>
 
         <!-- Pane 1: Calculator -->
@@ -879,7 +937,7 @@
         </div>
       </section>
 
-      <!-- MODULE 4: SNAKE GAME (Formerly Module 3) -->
+      <!-- MODULE 4: SNAKE GAME -->
       <section class="card-module">
         <div class="tab-bar">
           <button class="tab-btn active" style="background:var(--c-teal); color:#000;">🐍 SNAKE</button>
@@ -905,6 +963,26 @@
         </div>
       </section>
 
+      <!-- MODULE 5: HK LOCAL AI & ECONOMY NEWS (ADDED BELOW SNAKE) -->
+      <section class="card-module">
+        <div class="tab-bar">
+          <button class="tab-btn active" style="background:var(--c-blue); color:#FFF;"> 📰 NEWS </button>
+        </div>
+        <div class="pane-content active">
+          <div class="news-toolbar">
+            <div style="display:flex; gap:4px;">
+              <button class="btn" id="filterAllNews" style="padding:4px 8px; font-size:12px; background:var(--c-yellow);">全部</button>
+              <button class="btn" id="filterAiNews" style="padding:4px 8px; font-size:12px; background:var(--c-teal);">🤖 AI</button>
+              <button class="btn" id="filterEcoNews" style="padding:4px 8px; font-size:12px; background:var(--c-orange); color:#FFF;">💰 ECON</button>
+            </div>
+            <button class="btn" id="refreshNewsBtn" style="padding:4px 8px; font-size:12px;">🔄 刷新</button>
+          </div>
+          <div class="news-container" id="newsContainer">
+            <!-- News items dynamically loaded or populated via JS -->
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <!-- ==========================================================================
@@ -925,41 +1003,41 @@
 
         <h3 style="margin-top:16px; margin-bottom:8px; font-size:16px;">🔗 LINKS</h3>
         <div class="tools-grid">
-          <a class="tool-card" href="https://www.amazon.com/b?node=1064954&tag=YOUR_AFFILIATE_ID" target="_blank" rel="noopener noreferrer">
-            <div style="font-size:28px;">📦</div>
-            <div style="font-size:12px; margin-top:4px;">AMAZON OFFICE</div>
-          </a>
-          <a class="tool-card" href="https://www.canva.com/affiliates/" target="_blank" rel="noopener noreferrer">
-            <div style="font-size:28px;">🎨</div>
-            <div style="font-size:12px; margin-top:4px;">CANVA PRO</div>
-          </a>
-          <a class="tool-card" href="https://www.notion.so/affiliates" target="_blank" rel="noopener noreferrer">
-            <div style="font-size:28px;">📝</div>
-            <div style="font-size:12px; margin-top:4px;">NOTION</div>
-          </a>
-          <a class="tool-card" href="https://www.grammarly.com/affiliates" target="_blank" rel="noopener noreferrer">
-            <div style="font-size:28px;">✍️</div>
-            <div style="font-size:12px; margin-top:4px;">GRAMMARLY</div>
-          </a>
-          <a class="tool-card" href="https://www.fiverr.com/affiliates" target="_blank" rel="noopener noreferrer">
-            <div style="font-size:28px;">💼</div>
-            <div style="font-size:12px; margin-top:4px;">FIVERR</div>
-          </a>
-          <a class="tool-card" href="https://zoom.us" target="_blank" rel="noopener noreferrer">
-            <div style="font-size:28px;">📹</div>
-            <div style="font-size:12px; margin-top:4px;">ZOOM</div>
-          </a>
-          <a class="tool-card" href="https://nordvpn.com/affiliate/" target="_blank" rel="noopener noreferrer">
-            <div style="font-size:28px;">🔒</div>
-            <div style="font-size:12px; margin-top:4px;">NORDVPN</div>
-          </a>
-          <a class="tool-card" href="https://www.adobe.com/affiliates.html" target="_blank" rel="noopener noreferrer">
+          <a class="tool-card" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">
             <div style="font-size:28px;">🖼️</div>
-            <div style="font-size:12px; margin-top:4px;">ADOBE CC</div>
+            <div style="font-size:12px; margin-top:4px;">CANVA</div>
           </a>
-          <a class="tool-card" href="https://clickup.com/affiliates" target="_blank" rel="noopener noreferrer">
-            <div style="font-size:28px;">✅</div>
-            <div style="font-size:12px; margin-top:4px;">CLICKUP</div>
+          <a class="tool-card" href="https://www.remove.bg/" target="_blank" rel="noopener noreferrer">
+            <div style="font-size:28px;">✂️</div>
+            <div style="font-size:12px; margin-top:4px;">REMOVE BG</div>
+          </a>
+          <a class="tool-card" href="https://colorhunt.co/" target="_blank" rel="noopener noreferrer">
+            <div style="font-size:28px;">🎨</div>
+            <div style="font-size:12px; margin-top:4px;">COLOR HUNT</div>
+          </a>
+          <a class="tool-card" href="https://www.photopea.com/" target="_blank" rel="noopener noreferrer">
+            <div style="font-size:28px;">🖼️</div>
+            <div style="font-size:12px; margin-top:4px;">PHOTOPEA</div>
+          </a>
+          <a class="tool-card" href="https://www.iloveimg.com/resize-image" target="_blank" rel="noopener noreferrer">
+            <div style="font-size:28px;">📐</div>
+            <div style="font-size:12px; margin-top:4px;">RESIZE IMAGE</div>
+          </a>
+          <a class="tool-card" href="https://www.mksucai.com/" target="_blank" rel="noopener noreferrer">
+            <div style="font-size:28px;">📦</div>
+            <div style="font-size:12px; margin-top:4px;">SUCAI</div>
+          </a>
+          <a class="tool-card" href="https://www.youtube.com/watch?v=yLOM8R6lbzg" target="_blank" rel="noopener noreferrer">
+            <div style="font-size:28px;">▶️</div>
+            <div style="font-size:12px; margin-top:4px;">YOUTUBE</div>
+          </a>
+          <a class="tool-card" href="https://www.doubao.com/" target="_blank" rel="noopener noreferrer">
+            <div style="font-size:28px;">🫘</div>
+            <div style="font-size:12px; margin-top:4px;">DOUBAO</div>
+          </a>
+          <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">
+            <div style="font-size:28px;">✨</div>
+            <div style="font-size:12px; margin-top:4px;">GEMINI</div>
           </a>
           <a class="tool-card" href="https://www.microsoft.com/en-us/microsoft-365" target="_blank" rel="noopener noreferrer">
             <div style="font-size:28px;">📊</div>
@@ -1364,6 +1442,97 @@
 
     document.getElementById('snakeStartBtn').addEventListener('click', startGame);
     document.getElementById('snakeRestartBtn').addEventListener('click', startGame);
+
+    /* HK Local AI & Economy News Data & Logic */
+    const hkNewsData = [
+      {
+        title: "香港数码港全力构建AI生态圈：已汇聚逾250家智慧生活及人工智能初创企业",
+        source: "香港经济日报 (HKET)",
+        category: "ai",
+        time: "1小时前",
+        url: "https://topick.hket.com/"
+      },
+      {
+        title: "财政司司长：特区政府正积极推动国际创新科技中心建设，加速中小企利用AI进行数码转型",
+        source: "信报财经新闻 (HKEJ)",
+        category: "eco",
+        time: "3小时前",
+        url: "https://www2.hkej.com/"
+      },
+      {
+        title: "金管局联同数码港合办Generative AI银行业应用研讨会，探讨风险管理与合规挑战",
+        source: "香港电台 (RTHK)",
+        category: "ai",
+        time: "5小时前",
+        url: "https://news.rthk.hk/"
+      },
+      {
+        title: "港交所新特专科技公司上市制度显成效，多家具备AI核心技术的企业正积极筹备赴港挂牌",
+        source: "AASTOCKS 财经",
+        category: "eco",
+        time: "6小时前",
+        url: "http://www.aastocks.com/"
+      },
+      {
+        title: "香港科技大学与本地科创企业合作成立AI联合实验室，聚焦大湾区智慧城市与数字经济",
+        source: "香港文汇报",
+        category: "ai",
+        time: "9小时前",
+        url: "https://www.wenweipo.com/"
+      },
+      {
+        title: "香港金管局公布最新外汇基金数据，强调本地金融体系保持强韧，科技创新投资成新亮点",
+        source: "香港经济日报 (HKET)",
+        category: "eco",
+        time: "12小时前",
+        url: "https://topick.hket.com/"
+      }
+    ];
+
+    function renderNews(filter = 'all') {
+      const container = document.getElementById('newsContainer');
+      container.innerHTML = '';
+      
+      const filtered = hkNewsData.filter(item => filter === 'all' || item.category === filter);
+      
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'news-card';
+        
+        const tagClass = item.category === 'ai' ? 'news-tag-ai' : 'news-tag-eco';
+        const tagText = item.category === 'ai' ? '🤖 AI' : '💰 ECON';
+
+        card.innerHTML = `
+          <div class="news-meta">
+            <span class="news-source">${item.source}</span>
+            <span style="font-weight:bold; color:#7209B7;">${item.time}</span>
+          </div>
+          <a class="news-title" href="${item.url}" target="_blank" rel="noopener noreferrer">${item.title}</a>
+          <div style="display:flex; gap:4px; margin-top:2px;">
+            <span class="news-source ${tagClass}" style="font-size:10px; padding:1px 4px;">${tagText}</span>
+            <span style="font-size:10px; color:#666; align-self:center;">🇭🇰 香港本地新闻</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById('filterAllNews').addEventListener('click', () => { triggerHaptic(); playClickSound(); renderNews('all'); });
+    document.getElementById('filterAiNews').addEventListener('click', () => { triggerHaptic(); playClickSound(); renderNews('ai'); });
+    document.getElementById('filterEcoNews').addEventListener('click', () => { triggerHaptic(); playClickSound(); renderNews('eco'); });
+    
+    document.getElementById('refreshNewsBtn').addEventListener('click', () => {
+      triggerHaptic(); playClickSound();
+      // Simulate quick refresh animation or shuffle/re-render
+      const container = document.getElementById('newsContainer');
+      container.style.opacity = '0.3';
+      setTimeout(() => {
+        renderNews('all');
+        container.style.opacity = '1';
+      }, 200);
+    });
+
+    renderNews('all');
 
     /* QR Code */
     function renderQRCode() {
