@@ -9,7 +9,6 @@
        1. COLOR POP & MINIMAL DUAL DESIGN SYSTEM
        ========================================================================== */
     :root {
-      /* Dynamic theme tokens (Default: Color Pop) */
       --c-yellow: #FFD166;
       --c-pink: #FF477E;
       --c-teal: #06D6A0;
@@ -30,11 +29,8 @@
       --radius-lg: 16px;
       --radius-md: 10px;
       --radius-sm: 6px;
-
-      --pattern-display: block;
     }
 
-    /* Minimal Dual Theme Overrides */
     body.theme-minimal {
       --c-yellow: #F4F4F5;
       --c-pink: #18181B;
@@ -56,33 +52,13 @@
       background-image: none !important;
     }
 
-    body.theme-minimal .app-header {
-      background: var(--c-pink);
-    }
-    body.theme-minimal .app-title {
-      color: #FFFFFF;
-      text-shadow: none;
-    }
-    body.theme-minimal .tab-btn {
-      background: #F4F4F5;
-      color: #18181B;
-    }
-    body.theme-minimal .tab-btn.active {
-      background: #18181B;
-      color: #FFFFFF;
-    }
-    body.theme-minimal .btn {
-      background: #F4F4F5;
-      color: #18181B;
-    }
-    body.theme-minimal .nav-item.active {
-      background: #18181B;
-      color: #FFFFFF;
-    }
-    body.theme-minimal .countdown-display {
-      color: #FFFFFF;
-      text-shadow: none;
-    }
+    body.theme-minimal .app-header { background: var(--c-pink); }
+    body.theme-minimal .app-title { color: #FFFFFF; text-shadow: none; }
+    body.theme-minimal .tab-btn { background: #F4F4F5; color: #18181B; }
+    body.theme-minimal .tab-btn.active { background: #18181B; color: #FFFFFF; }
+    body.theme-minimal .btn { background: #F4F4F5; color: #18181B; }
+    body.theme-minimal .nav-item.active { background: #18181B; color: #FFFFFF; }
+    body.theme-minimal .countdown-display { color: #FFFFFF; text-shadow: none; }
 
     * {
       box-sizing: border-box;
@@ -123,7 +99,6 @@
       transition: border 0.2s, box-shadow 0.2s;
     }
 
-    /* Confetti Canvas */
     #confettiCanvas {
       position: fixed;
       top: 0;
@@ -134,9 +109,7 @@
       z-index: 999;
     }
 
-    /* ==========================================================================
-       2. DRAWER & SIDEBAR
-       ========================================================================== */
+    /* DRAWER & SIDEBAR */
     .drawer-toggle-btn {
       position: fixed;
       left: 0;
@@ -158,9 +131,7 @@
       box-shadow: var(--shadow);
       transition: all 0.15s ease;
     }
-    .drawer-toggle-btn:active {
-      transform: translateY(-50%) scale(0.95);
-    }
+    .drawer-toggle-btn:active { transform: translateY(-50%) scale(0.95); }
 
     .nav-overlay {
       position: fixed;
@@ -174,10 +145,7 @@
       pointer-events: none;
       transition: opacity 0.2s ease;
     }
-    .nav-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .nav-overlay.active { opacity: 1; pointer-events: auto; }
 
     .nav-drawer {
       position: fixed;
@@ -193,9 +161,7 @@
       flex-direction: column;
       padding: 24px 16px;
     }
-    .nav-drawer.active {
-      transform: translateX(240px);
-    }
+    .nav-drawer.active { transform: translateX(240px); }
 
     .nav-header {
       font-size: 22px;
@@ -225,12 +191,8 @@
       color: var(--text-main);
       transition: all 0.1s;
     }
-    .nav-item.active {
-      background: var(--c-pink);
-      color: #FFF;
-    }
+    .nav-item.active { background: var(--c-pink); color: #FFF; }
 
-    /* Header & Minimal Theme Switcher */
     .app-header {
       position: relative;
       text-align: center;
@@ -261,9 +223,7 @@
       user-select: none;
       transition: all 0.15s;
     }
-    .theme-switch-btn:active {
-      transform: translateY(-50%) scale(0.95);
-    }
+    .theme-switch-btn:active { transform: translateY(-50%) scale(0.95); }
 
     .app-title {
       font-size: 24px;
@@ -273,9 +233,6 @@
       text-transform: uppercase;
     }
 
-    /* ==========================================================================
-       3. PAGE VIEWS & CARD MODULES
-       ========================================================================== */
     .page-view {
       display: none;
       padding: 14px;
@@ -284,9 +241,7 @@
       gap: 14px;
       overflow-y: auto;
     }
-    .page-view.active {
-      display: flex;
-    }
+    .page-view.active { display: flex; }
 
     .card-module {
       background: var(--card-bg);
@@ -298,7 +253,6 @@
       flex-direction: column;
     }
 
-    /* Pill Tabs Header */
     .tab-bar {
       display: flex;
       background: var(--c-dark);
@@ -331,11 +285,9 @@
       padding: 14px;
       display: none;
     }
-    .pane-content.active {
-      display: block;
-    }
+    .pane-content.active { display: block; }
+    .pane-content.active-flex { display: flex; }
 
-    /* Universal Buttons & Selects */
     .btn {
       border: var(--border);
       border-radius: var(--radius-md);
@@ -351,10 +303,15 @@
       gap: 6px;
       user-select: none;
       transition: all 0.1s;
+      font-weight: 900;
     }
-    .btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: var(--shadow-active);
+    .btn:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      filter: grayscale(0.4);
+      box-shadow: 2px 2px 0px var(--c-dark);
+      transform: none;
     }
 
     .select-custom {
@@ -369,9 +326,7 @@
       box-shadow: var(--shadow);
     }
 
-    /* ==========================================================================
-       4. MODULE 1 (NOW): AQUARIUM & AUDIO
-       ========================================================================== */
+    /* AQUARIUM & CAM SWITCHER */
     .video-wrap {
       position: relative;
       width: 100%;
@@ -381,28 +336,38 @@
       border: var(--border);
       box-shadow: var(--shadow);
     }
-    .video-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+    .video-wrap iframe { width: 100%; height: 100%; border: none; }
 
     .ambient-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: var(--c-pink);
-      padding: 8px 12px;
+      padding: 8px 10px;
       border-radius: var(--radius-md);
       border: var(--border);
       margin-top: 8px;
       color: #FFF;
       font-size: 14px;
+      gap: 4px;
+    }
+    .cam-btn-group {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .cam-btn {
+      padding: 6px 8px;
+      font-size: 14px;
+      border-radius: var(--radius-sm);
+    }
+    .cam-btn.active {
+      background: var(--c-dark) !important;
+      color: #FFF !important;
+      box-shadow: inset 0 0 0 2px #FFF;
     }
 
-    /* ==========================================================================
-       5. MODULE 2 (NOW): COUNTDOWN & HOLIDAY CALENDAR
-       ========================================================================== */
+    /* COUNTDOWN & CALENDAR */
     .countdown-dashboard {
       background: var(--c-purple);
       color: #FFF;
@@ -421,17 +386,13 @@
       margin: 4px 0;
     }
 
-    /* Calendar Grid */
     .calendar-ctrl {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
     }
-    .calendar-title {
-      font-size: 16px;
-      color: var(--text-main);
-    }
+    .calendar-title { font-size: 16px; color: var(--text-main); font-weight: 900; }
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -453,13 +414,16 @@
       color: #1A1A24;
       border: 1.5px solid var(--c-dark);
       border-radius: var(--radius-sm);
-      height: 36px;
+      height: 38px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       font-size: 13px;
       position: relative;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.1s;
     }
     .cal-day.other-month { opacity: 0.3; }
     .cal-day.today {
@@ -468,31 +432,36 @@
       font-weight: bold;
     }
     .cal-day.holiday {
-      background: var(--c-yellow);
+      background: #FFF9D2;
+      font-weight: bold;
+    }
+    .cal-day.selected {
+      box-shadow: inset 0 0 0 2px var(--c-purple);
+      transform: scale(0.96);
     }
     .holiday-dot {
       width: 6px;
       height: 6px;
-      background-color: var(--c-pink);
+      background-color: #FF0033;
       border-radius: 50%;
-      border: 1px solid var(--c-dark);
       position: absolute;
-      bottom: 2px;
+      bottom: 3px;
+      box-shadow: 0 0 3px rgba(255, 0, 51, 0.8);
     }
-    .calendar-legend {
-      font-size: 12px;
-      background: var(--c-teal);
-      color: #1A1A24;
-      padding: 8px;
-      border-radius: var(--radius-md);
+    .holiday-info-card {
+      background: var(--c-yellow);
       border: var(--border);
-      max-height: 80px;
-      overflow-y: auto;
+      border-radius: var(--radius-md);
+      padding: 8px 12px;
+      margin-bottom: 2px;
+      font-size: 13px;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    /* ==========================================================================
-       6. MODULE 3 (NOW): CALCULATOR & DROP STAGE
-       ========================================================================== */
+    /* CALCULATOR & DROPS */
     .calc-display-wrap {
       background: var(--c-yellow);
       border: var(--border);
@@ -535,7 +504,6 @@
     .calc-btn.fn { background: var(--c-blue); color: #FFF; }
     .calc-btn.span-2 { grid-column: span 2; }
 
-    /* Drop Stage */
     .drop-controls {
       display: flex;
       gap: 6px;
@@ -567,9 +535,19 @@
     }
 
     /* ==========================================================================
-       7. MODULE 4 (NOW): SNAKE GAME
+       MODULE 4: GAME AREA (2048 & MINER)
        ========================================================================== */
-    .snake-header {
+    .game-pane {
+      display: none !important;
+      padding: 14px;
+      flex-direction: column;
+      align-items: center;
+    }
+    .game-pane.active {
+      display: flex !important;
+    }
+
+    .g2048-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -577,36 +555,71 @@
       width: 100%;
       max-width: 280px;
     }
-    .snake-score-badge {
-      font-size: 14px;
+    .g2048-score-box {
+      display: flex;
+      gap: 6px;
+    }
+    .g2048-score-badge {
+      font-size: 13px;
       background: var(--c-yellow);
       color: #1A1A24;
       border: var(--border);
-      padding: 4px 8px;
+      padding: 3px 6px;
       border-radius: var(--radius-sm);
+      font-weight: 900;
     }
-    .snake-canvas-wrap {
+    .g2048-board-wrap {
       position: relative;
       width: 100%;
       display: flex;
       justify-content: center;
     }
-    canvas#snakeCanvas {
+    .g2048-board {
       width: 280px;
       height: 280px;
       background-color: var(--c-dark);
       border: var(--border);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 6px;
+      padding: 6px;
+      touch-action: none;
+      user-select: none;
     }
-    .snake-overlay {
+    .g2048-cell {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      border: 1.5px solid rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 900;
+      transition: transform 0.08s ease;
+    }
+    .g2048-cell[data-val="2"]    { background: #FFF; color: #1A1A24; }
+    .g2048-cell[data-val="4"]    { background: #FFE5EC; color: #1A1A24; }
+    .g2048-cell[data-val="8"]    { background: var(--c-yellow); color: #1A1A24; }
+    .g2048-cell[data-val="16"]   { background: var(--c-orange); color: #FFF; }
+    .g2048-cell[data-val="32"]   { background: var(--c-pink); color: #FFF; }
+    .g2048-cell[data-val="64"]   { background: #D90429; color: #FFF; }
+    .g2048-cell[data-val="128"]  { background: var(--c-teal); color: #1A1A24; font-size: 16px; }
+    .g2048-cell[data-val="256"]  { background: var(--c-blue); color: #FFF; font-size: 16px; }
+    .g2048-cell[data-val="512"]  { background: var(--c-purple); color: #FFF; font-size: 16px; }
+    .g2048-cell[data-val="1024"] { background: #FFB703; color: #1A1A24; font-size: 14px; }
+    .g2048-cell[data-val="2048"] { background: #FB8500; color: #FFF; font-size: 14px; box-shadow: 0 0 10px #FFD166; }
+
+    .g2048-overlay {
       position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 280px;
       height: 280px;
-      background: rgba(26, 26, 36, 0.9);
+      background: rgba(26, 26, 36, 0.88);
       border-radius: var(--radius-md);
       display: flex;
       flex-direction: column;
@@ -616,9 +629,9 @@
       gap: 10px;
       z-index: 10;
     }
-    .snake-overlay.hidden { display: none; }
+    .g2048-overlay.hidden { display: none; }
 
-    .snake-dpad {
+    .g2048-dpad {
       display: grid;
       grid-template-columns: repeat(3, 44px);
       grid-template-rows: repeat(2, 44px);
@@ -647,9 +660,83 @@
     .dbtn-down { grid-column: 2; grid-row: 2; }
     .dbtn-right { grid-column: 3; grid-row: 2; }
 
-    /* ==========================================================================
-       8. NEW MODULE 5: HK AI & ECO NEWS
-       ========================================================================== */
+    /* MINER MODULE STYLES */
+    .miner-wrap {
+      width: 100%;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+    }
+    .miner-badge-bar {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 8px;
+      gap: 6px;
+    }
+    .miner-badge-group {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+      overflow-x: auto;
+    }
+    .miner-badge {
+      font-size: 12px;
+      line-height: 1.2;
+      background: var(--c-yellow);
+      color: var(--c-dark);
+      border: var(--border);
+      padding: 4px 6px;
+      border-radius: var(--radius-sm);
+      font-weight: 900;
+      box-shadow: 2px 2px 0px var(--c-dark);
+      white-space: nowrap;
+      text-align: center;
+    }
+    .miner-canvas-wrap {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border: var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #FFF9E6;
+      cursor: crosshair;
+    }
+    #minerCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .miner-overlay-modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(43, 38, 31, 0.94);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      gap: 10px;
+      z-index: 10;
+      text-align: center;
+      padding: 16px;
+    }
+    .miner-overlay-modal.hidden { display: none; }
+    .miner-ctrl-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    /* NEWS */
     .news-container {
       display: flex;
       flex-direction: column;
@@ -695,9 +782,7 @@
       text-decoration: none;
       line-height: 1.2;
     }
-    .news-title:hover {
-      color: var(--c-pink);
-    }
+    .news-title:hover { color: var(--c-pink); }
     .news-toolbar {
       display: flex;
       justify-content: space-between;
@@ -705,9 +790,7 @@
       margin-bottom: 8px;
     }
 
-    /* ==========================================================================
-       9. TOOLS PAGE
-       ========================================================================== */
+    /* TOOLS PAGE */
     .qr-container {
       display: flex;
       flex-direction: column;
@@ -757,7 +840,11 @@
 
     @media (max-width: 360px) {
       .pane-content { padding: 8px; }
-      canvas#snakeCanvas, .snake-overlay { width: 230px; height: 230px; }
+      .g2048-board, .g2048-overlay { width: 230px; height: 230px; }
+      .g2048-cell { font-size: 14px; }
+      .g2048-cell[data-val="128"], .g2048-cell[data-val="256"], .g2048-cell[data-val="512"] { font-size: 13px; }
+      .g2048-cell[data-val="1024"], .g2048-cell[data-val="2048"] { font-size: 11px; }
+      .miner-canvas-wrap { width: 260px; height: 260px; }
       .calc-btn { padding: 8px 0; font-size: 16px; }
       .countdown-display { font-size: 28px; }
     }
@@ -798,19 +885,23 @@
        ========================================================================== -->
     <main class="page-view active" id="pageBored">
       
-      <!-- MODULE 1: AQUARIUM -->
+      <!-- MODULE 1: AQUARIUM & LIVE CAMS -->
       <section class="card-module">
         <div class="tab-bar">
-          <button class="tab-btn active" style="background:var(--c-purple); color:#FFF;">🐟 AquaRium </button>
+          <button class="tab-btn active" id="camTitleTab" style="background:var(--c-purple); color:#FFF;">🐟 AquaRium</button>
         </div>
         <div class="pane-content active">
           <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/kCl3bHPcw1I" allowfullscreen></iframe>
+            <iframe id="mainCamFrame" src="https://www.youtube.com/embed/kCl3bHPcw1I" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="ambient-bar">
-            <span>🔊 NOISE:</span>
-            <button class="btn" id="btnAmbientRain">🌧️</button>
-            <button class="btn" id="btnAmbientWaves">🌊</button>
+            <button class="btn cam-btn active" id="btnCamHome" title="回到魚缸水族館">🐟</button>
+            <div class="cam-btn-group">
+              <button class="btn cam-btn" id="btnCamVolcano" title="火山 Live Cam">🌋</button>
+              <button class="btn cam-btn" id="btnCamAnimal" title="動物 Live Cam">🐾</button>
+              <button class="btn cam-btn" id="btnCamPlane" title="飛機 Live Cam">✈️</button>
+              <button class="btn cam-btn" id="btnCamStreet" title="街道 Live Cam">🚦</button>
+            </div>
           </div>
         </div>
       </section>
@@ -828,13 +919,14 @@
           <div style="display:flex; justify-content:center; align-items:center; gap:6px; margin-bottom:8px;">
             <select class="select-custom" id="selectTz">
               <option value="Asia/Hong_Kong">🇭🇰 HK</option>
-              <option value="Asia/Taipei">🇹🇼 TW</option>
               <option value="Asia/Tokyo">🇯🇵 JP</option>
-              <option value="Asia/Singapore">🇸🇬 SG</option>
-              <option value="America/New_York">🇺🇸 US-E</option>
-              <option value="America/Los_Angeles">🇺🇸 US-W</option>
-              <option value="Europe/London">🇬🇧 UK</option>
+              <option value="Asia/Seoul">🇰🇷 KR</option>
+              <option value="Asia/Bangkok">🇹🇭 TH</option>
               <option value="Australia/Sydney">🇦🇺 AU</option>
+              <option value="Europe/London">🇬🇧 UK</option>
+              <option value="America/New_York">🇺🇸 US-E</option>
+              <option value="America/Toronto">🇨🇦 CA</option>
+              <option value="Asia/Singapore">🇸🇬 SG</option>
             </select>
             <select class="select-custom" id="selectHour"></select>
             <span style="font-weight:900;">:</span>
@@ -854,23 +946,28 @@
         <div class="pane-content" id="pane-m1-2">
           <div class="calendar-ctrl">
             <button class="btn" id="calPrevBtn">‹</button>
-            <div class="calendar-title" id="calTitle">JAN 2026</div>
+            <div class="calendar-title" id="calTitle">NOV 2026</div>
             <button class="btn" id="calNextBtn">›</button>
           </div>
           <div style="display:flex; justify-content:center; gap:6px; margin-bottom:8px;">
-            <select class="select-custom" id="calRegionSelect" style="font-size:12px;">
-              <option value="HK">🇭🇰 HK</option>
-              <option value="TW">🇹🇼 TW</option>
-              <option value="JP">🇯🇵 JP</option>
-              <option value="SG">🇸🇬 SG</option>
-              <option value="US">🇺🇸 US</option>
-              <option value="UK">🇬🇧 UK</option>
-              <option value="AU">🇦🇺 AU</option>
+            <select class="select-custom" id="calRegionSelect" style="font-size:12px; width:100%;">
+              <option value="HK" selected>🇭🇰 香港 (Hong Kong)</option>
+              <option value="JP">🇯🇵 日本 (Japan)</option>
+              <option value="KR">🇰🇷 韓國 (South Korea)</option>
+              <option value="TH">泰國 (Thailand)</option>
+              <option value="AU">🇦🇺 澳洲 (Australia)</option>
+              <option value="UK">🇬🇧 英國 (United Kingdom)</option>
+              <option value="US">🇺🇸 美國 (United States)</option>
+              <option value="CA">🇨🇦 加拿大 (Canada)</option>
+              <option value="SG">🇸🇬 新加坡 (Singapore)</option>
             </select>
           </div>
+
           <div class="calendar-grid" id="calGrid"></div>
-          <div class="calendar-legend">
-            <div id="legendList">🎉 NO HOLIDAYS</div>
+
+          <div class="holiday-info-card" id="calInfoCard">
+            <span style="font-size:16px;">💡</span>
+            <span id="calInfoText">點擊紅點日期查看假期詳情</span>
           </div>
         </div>
 
@@ -890,7 +987,6 @@
           <button class="tab-btn" id="tab-m2-2">💰 MONEY</button>
         </div>
 
-        <!-- Pane 1: Calculator -->
         <div class="pane-content active" id="pane-m2-1">
           <div class="calc-display-wrap">
             <div class="calc-display" id="calcDisplay">0</div>
@@ -922,7 +1018,6 @@
           </div>
         </div>
 
-        <!-- Pane 2: Emoji Drops -->
         <div class="pane-content" id="pane-m2-2">
           <div class="drop-controls">
             <input type="number" id="dropCountInput" class="select-custom" style="width:65px;" min="1" max="999" value="50">
@@ -937,33 +1032,75 @@
         </div>
       </section>
 
-      <!-- MODULE 4: SNAKE GAME -->
-      <section class="card-module">
+      <!-- MODULE 4: GAME AREA (2048 & MINER 徹底獨立分頁) -->
+      <section class="card-module" id="gameModule">
         <div class="tab-bar">
-          <button class="tab-btn active" style="background:var(--c-teal); color:#000;">🐍 SNAKE</button>
+          <button class="tab-btn active" id="tabGame2048" style="background:var(--c-teal); color:#000;">🎲 2048</button>
+          <button class="tab-btn" id="tabGameMiner" style="background:var(--c-orange); color:#000;">⛏️ MINER</button>
         </div>
-        <div class="pane-content active" style="display:flex; flex-direction:column; align-items:center;">
-          <div class="snake-header">
-            <span class="snake-score-badge" id="snakeScore">SCORE: 0</span>
-            <button class="btn" id="snakeRestartBtn">↺</button>
+
+        <!-- 2048 Game Content -->
+        <div class="game-pane active" id="paneGame2048">
+          <div class="g2048-header">
+            <div class="g2048-score-box">
+              <span class="g2048-score-badge" id="g2048Score">SCORE: 0</span>
+              <span class="g2048-score-badge" id="g2048Best" style="background:var(--c-pink); color:#FFF;">BEST: 0</span>
+            </div>
+            <button class="btn" id="g2048RestartBtn" style="padding:4px 8px;">↺</button>
           </div>
-          <div class="snake-canvas-wrap">
-            <canvas id="snakeCanvas" width="280" height="280"></canvas>
-            <div class="snake-overlay" id="snakeOverlay">
-              <div id="snakeOverlayText" style="font-size:22px;">PLAY SNAKE</div>
-              <button class="btn" id="snakeStartBtn" style="background:var(--c-teal); font-size:16px;">START</button>
+
+          <div class="g2048-board-wrap">
+            <div class="g2048-board" id="g2048Board"></div>
+            <div class="g2048-overlay hidden" id="g2048Overlay">
+              <div id="g2048OverlayText" style="font-size:22px; font-weight:900;">GAME OVER</div>
+              <button class="btn" id="g2048StartBtn" style="background:var(--c-teal); font-size:16px;">TRY AGAIN</button>
             </div>
           </div>
-          <div class="snake-dpad">
-            <button class="dbtn dbtn-up" id="dpadUp">▲</button>
-            <button class="dbtn dbtn-left" id="dpadLeft">◀</button>
-            <button class="dbtn dbtn-down" id="dpadDown">▼</button>
-            <button class="dbtn dbtn-right" id="dpadRight">▶</button>
+
+          <!-- D-Pad -->
+          <div class="g2048-dpad">
+            <button class="dbtn dbtn-up" id="btn2048Up">▲</button>
+            <button class="dbtn dbtn-left" id="btn2048Left">◀</button>
+            <button class="dbtn dbtn-down" id="btn2048Down">▼</button>
+            <button class="dbtn dbtn-right" id="btn2048Right">▶</button>
+          </div>
+        </div>
+
+        <!-- Miner Game Content -->
+        <div class="game-pane" id="paneGameMiner">
+          <div class="miner-wrap">
+            <div class="miner-badge-bar">
+              <div class="miner-badge-group">
+                <span class="miner-badge" id="mStageBadge" style="background:var(--c-purple); color:#FFF;">LV 1/9</span>
+                <span class="miner-badge" id="mScoreBadge">💰 0</span>
+                <span class="miner-badge" id="mTargetBadge" style="background:var(--c-teal);">🎯 450</span>
+                <span class="miner-badge" id="mTimerBadge" style="background:var(--c-pink); color:#FFF; min-width:55px;">⏳ 20s</span>
+              </div>
+              <button class="btn" id="mRestartBtn" style="padding: 4px 8px; font-size: 15px; flex-shrink: 0;" title="重置當前關卡">↺</button>
+            </div>
+
+            <!-- Canvas Stage (點擊發射抓爪) -->
+            <div class="miner-canvas-wrap" id="minerCanvasWrap" title="點擊螢幕下爪">
+              <canvas id="minerCanvas" width="300" height="300"></canvas>
+              
+              <div id="mOverlay" class="miner-overlay-modal hidden">
+                <div id="mOverlayTitle" style="font-size: 20px; font-weight: 900; line-height: 1.2;">STAGE CLEARED!</div>
+                <div id="mOverlayDesc" style="font-size: 13px; color: var(--c-yellow); font-family: sans-serif; line-height: 1.4;"></div>
+                <button class="btn" id="mActionBtn" style="background: var(--c-teal); font-size: 15px; padding: 8px 18px;">NEXT LEVEL</button>
+              </div>
+            </div>
+
+            <!-- Control Bar (僅保留通關下一關按鈕) -->
+            <div class="miner-ctrl-bar">
+              <button class="btn" id="mNextStageBtn" style="flex:1; background:var(--c-teal); font-size:14px; padding: 10px 0;" disabled>
+                NEXT LEVEL
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- MODULE 5: HK LOCAL AI & ECONOMY NEWS (ADDED BELOW SNAKE) -->
+      <!-- MODULE 5: HK LOCAL AI & ECONOMY NEWS -->
       <section class="card-module">
         <div class="tab-bar">
           <button class="tab-btn active" style="background:var(--c-blue); color:#FFF;"> 📰 NEWS </button>
@@ -977,9 +1114,7 @@
             </div>
             <button class="btn" id="refreshNewsBtn" style="padding:4px 8px; font-size:12px;">🔄 刷新</button>
           </div>
-          <div class="news-container" id="newsContainer">
-            <!-- News items dynamically loaded or populated via JS -->
-          </div>
+          <div class="news-container" id="newsContainer"></div>
         </div>
       </section>
 
@@ -1049,15 +1184,14 @@
   </div>
 
   <script>
-    /* Theme Switching Functionality */
+    /* Theme Switching */
     const themeSwitchBtn = document.getElementById('themeSwitchBtn');
     const themeBtnIcon = document.getElementById('themeBtnIcon');
     const themeBtnText = document.getElementById('themeBtnText');
     let isMinimalTheme = false;
 
     themeSwitchBtn.addEventListener('click', () => {
-      triggerHaptic();
-      playClickSound();
+      triggerHaptic(); playClickSound();
       isMinimalTheme = !isMinimalTheme;
       if (isMinimalTheme) {
         document.body.classList.add('theme-minimal');
@@ -1091,42 +1225,81 @@
         osc.stop(audioCtx.currentTime + 0.03);
       } catch (e) {}
     }
-    function triggerHaptic() { if (navigator.vibrate) navigator.vibrate(8); }
+    function playTone(freq, type = 'sine', dur = 0.04, gainVal = 0.1) {
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        g.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+        osc.connect(g);
+        g.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + dur);
+      } catch(e) {}
+    }
+    function triggerHaptic(ms = 8) { if (navigator.vibrate) navigator.vibrate(ms); }
 
-    let ambientNode = null, isAmbientPlaying = false, currentAmbientType = '';
-    function toggleAmbient(type) {
-      initAudio();
-      if (isAmbientPlaying && currentAmbientType === type) {
-        if (ambientNode) ambientNode.stop();
-        isAmbientPlaying = false;
-        return;
+    /* CAM SWITCHER LOGIC */
+    const mainCamFrame = document.getElementById('mainCamFrame');
+    const camTitleTab = document.getElementById('camTitleTab');
+    const camButtons = {
+      home: document.getElementById('btnCamHome'),
+      volcano: document.getElementById('btnCamVolcano'),
+      animal: document.getElementById('btnCamAnimal'),
+      plane: document.getElementById('btnCamPlane'),
+      street: document.getElementById('btnCamStreet')
+    };
+
+    const CAM_SOURCES = {
+      home: {
+        url: 'https://www.youtube.com/embed/kCl3bHPcw1I',
+        title: '🐟 AquaRium'
+      },
+      volcano: {
+        url: 'https://www.youtube.com/embed/qkSvU9j4kqM?si=5_AsM16Yc_wm14CQ',
+        title: '🌋 Volcano Cam'
+      },
+      animal: {
+        url: 'https://www.youtube.com/embed/ydYDqZQpim8?si=_C2QdGcCAUxyPgIB',
+        title: '🐾 Animal Cam'
+      },
+      plane: {
+        url: 'https://www.youtube.com/embed/wRYonRnKsKw?si=qSc3-DHr-kFTe8Og',
+        title: '✈️ Airport Cam'
+      },
+      street: {
+        url: 'https://www.youtube.com/embed/Q32h0W233Nw?si=TteBKKWF0ZbBIBdz',
+        title: '🚦 Street Cam'
       }
-      if (ambientNode) ambientNode.stop();
-      const bufferSize = audioCtx.sampleRate * 2;
-      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-      const output = noiseBuffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
+    };
 
-      const whiteNoise = audioCtx.createBufferSource();
-      whiteNoise.buffer = noiseBuffer;
-      whiteNoise.loop = true;
-      const filter = audioCtx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = type === 'rain' ? 800 : 350;
-      const gain = audioCtx.createGain();
-      gain.gain.value = 0.08;
+    function switchCam(camKey) {
+      triggerHaptic();
+      playClickSound();
+      const target = CAM_SOURCES[camKey];
+      if (!target) return;
 
-      whiteNoise.connect(filter);
-      filter.connect(gain);
-      gain.connect(audioCtx.destination);
-      whiteNoise.start();
-      ambientNode = whiteNoise;
-      isAmbientPlaying = true;
-      currentAmbientType = type;
+      mainCamFrame.src = target.url;
+      camTitleTab.textContent = target.title;
+
+      Object.keys(camButtons).forEach(k => {
+        if (k === camKey) {
+          camButtons[k].classList.add('active');
+        } else {
+          camButtons[k].classList.remove('active');
+        }
+      });
     }
 
-    document.getElementById('btnAmbientRain').addEventListener('click', () => { triggerHaptic(); toggleAmbient('rain'); });
-    document.getElementById('btnAmbientWaves').addEventListener('click', () => { triggerHaptic(); toggleAmbient('waves'); });
+    camButtons.home.addEventListener('click', () => switchCam('home'));
+    camButtons.volcano.addEventListener('click', () => switchCam('volcano'));
+    camButtons.animal.addEventListener('click', () => switchCam('animal'));
+    camButtons.plane.addEventListener('click', () => switchCam('plane'));
+    camButtons.street.addEventListener('click', () => switchCam('street'));
 
     /* Confetti */
     const confettiCanvas = document.getElementById('confettiCanvas');
@@ -1160,7 +1333,7 @@
       if (confettiParticles.length > 0) requestAnimationFrame(renderConfetti);
     }
 
-    /* Navigation & Tabs */
+    /* Navigation & Tools Switching */
     const drawerToggle = document.getElementById('drawerToggle');
     const navDrawer = document.getElementById('navDrawer');
     const navOverlay = document.getElementById('navOverlay');
@@ -1192,8 +1365,9 @@
     navBtnTools.addEventListener('click', () => switchPage('tools'));
     document.getElementById('toolsBackBtn').addEventListener('click', () => switchPage('bored'));
 
-    document.querySelectorAll('.card-module').forEach(module => {
-      const tabs = module.querySelectorAll('.tab-btn');
+    // 前三模組通用 Tab
+    document.querySelectorAll('.card-module:not(#gameModule)').forEach(module => {
+      const tabs = module.querySelectorAll('.tab-bar > .tab-btn');
       const panes = module.querySelectorAll('.pane-content');
       tabs.forEach((tab, index) => {
         tab.addEventListener('click', () => {
@@ -1207,7 +1381,31 @@
       });
     });
 
-    /* Countdown & Calendar Setup */
+    /* ==========================================================================
+       專屬遊戲分頁切換邏輯 (徹底獨立分頁)
+       ========================================================================== */
+    const tabGame2048 = document.getElementById('tabGame2048');
+    const tabGameMiner = document.getElementById('tabGameMiner');
+    const paneGame2048 = document.getElementById('paneGame2048');
+    const paneGameMiner = document.getElementById('paneGameMiner');
+
+    tabGame2048.addEventListener('click', () => {
+      triggerHaptic(); playClickSound();
+      tabGame2048.classList.add('active');
+      tabGameMiner.classList.remove('active');
+      paneGame2048.classList.add('active');
+      paneGameMiner.classList.remove('active');
+    });
+
+    tabGameMiner.addEventListener('click', () => {
+      triggerHaptic(); playClickSound();
+      tabGameMiner.classList.add('active');
+      tabGame2048.classList.remove('active');
+      paneGameMiner.classList.add('active');
+      paneGame2048.classList.remove('active');
+    });
+
+    /* Countdown Setup */
     const selectHour = document.getElementById('selectHour');
     const selectMin = document.getElementById('selectMin');
     const selectTz = document.getElementById('selectTz');
@@ -1260,70 +1458,216 @@
       timerInterval = null; timerOutput.textContent = "00:00:00";
     });
 
-    /* Calendar */
+    /* 9 國假期庫 */
+    function getNthWeekday(year, monthIndex, nth, dayOfWeek) {
+      if (nth > 0) {
+        let date = new Date(year, monthIndex, 1);
+        let count = 0;
+        while (date.getMonth() === monthIndex) {
+          if (date.getDay() === dayOfWeek) {
+            count++;
+            if (count === nth) return date.getDate();
+          }
+          date.setDate(date.getDate() + 1);
+        }
+      } else {
+        let date = new Date(year, monthIndex + 1, 0);
+        let count = 0;
+        while (date.getMonth() === monthIndex) {
+          if (date.getDay() === dayOfWeek) {
+            count--;
+            if (count === nth) return date.getDate();
+          }
+          date.setDate(date.getDate() - 1);
+        }
+      }
+      return null;
+    }
+
+    const FIXED_HOLIDAYS = {
+      "HK": { "01-01":"元旦 (New Year's Day)", "05-01":"勞動節 (Labor Day)", "07-01":"香港特區成立紀念日", "10-01":"國慶日 (National Day)", "12-25":"聖誕節 (Christmas)", "12-26":"節禮日 (Boxing Day)" },
+      "JP": { "01-01":"元日", "02-11":"建國記念之日", "02-23":"天皇誕生日", "04-29":"昭和之日", "05-03":"憲法記念日", "05-04":"綠之日", "05-05":"兒童之日", "08-11":"山之日", "11-03":"文化之日", "11-23":"勤勞感謝之日" },
+      "KR": { "01-01":"新年", "03-01":"三一節", "05-01":"勞動節 (勞工專屬)", "05-05":"兒童節", "06-06":"顯忠日", "08-15":"光復節", "10-03":"開天節", "10-09":"韓文日", "12-25":"聖誕節" },
+      "TH": { "01-01":"元旦 (New Year)", "04-06":"卻克里王朝紀念日", "04-13":"宋干潑水節", "04-14":"宋干潑水節", "04-15":"宋干潑水節", "05-01":"全國勞動節", "05-04":"泰王登基紀念日", "07-28":"現任泰王誕辰", "08-12":"母親節 (王太后誕辰)", "10-13":"九世王逝世紀念日", "10-23":"五世王紀念日", "12-05":"國慶日/父親節", "12-10":"憲法紀念日", "12-31":"除夕" },
+      "AU": { "01-01":"New Year's Day", "01-26":"Australia Day", "04-25":"ANZAC Day", "12-25":"Christmas Day", "12-26":"Boxing Day" },
+      "UK": { "01-01":"New Year's Day", "12-25":"Christmas Day", "12-26":"Boxing Day" },
+      "US": { "01-01":"New Year's Day", "06-19":"Juneteenth", "07-04":"Independence Day", "11-11":"Veterans Day", "12-25":"Christmas Day" },
+      "CA": { "01-01":"New Year's Day", "07-01":"Canada Day", "09-30":"Truth and Reconciliation Day", "11-11":"Remembrance Day", "12-25":"Christmas Day", "12-26":"Boxing Day" },
+      "SG": { "01-01":"New Year's Day", "05-01":"Labour Day", "08-09":"National Day", "12-25":"Christmas Day" }
+    };
+
+    const FLOATING_HOLIDAYS = {
+      "HK": {
+        "2026-02-17":"農曆年初一", "2026-02-18":"農曆年初二", "2026-02-19":"農曆年初三", "2026-04-03":"耶穌受難節", "2026-04-04":"耶穌受難節翌日/清明節", "2026-04-06":"復活節星期一", "2026-05-24":"佛誕", "2026-06-19":"端午節", "2026-09-26":"中秋節翌日", "2026-10-19":"重陽節",
+        "2027-02-06":"農曆除夕", "2027-02-07":"農曆年初一", "2027-02-08":"農曆年初二", "2027-03-26":"耶穌受難節", "2027-03-29":"復活節星期一", "2027-04-05":"清明節", "2027-05-13":"佛誕", "2027-06-09":"端午節", "2027-09-16":"中秋節翌日", "2027-10-08":"重陽節"
+      },
+      "JP": {
+        "2026-03-20":"春分之日", "2026-09-23":"秋分之日",
+        "2027-03-21":"春分之日", "2027-09-23":"秋分之日"
+      },
+      "KR": {
+        "2026-02-16":"舊正除夕", "2026-02-17":"舊正 (春節)", "2026-02-18":"舊正翌日", "2026-05-24":"釋迦誕辰日", "2026-09-24":"秋夕前日", "2026-09-25":"秋夕 (中秋)", "2026-09-26":"秋夕翌日",
+        "2027-02-06":"舊正除夕", "2027-02-07":"舊正 (春節)", "2027-02-08":"舊正翌日", "2027-05-13":"釋迦誕辰日", "2027-09-14":"秋夕前日", "2027-09-15":"秋夕 (中秋)", "2027-09-16":"秋夕翌日"
+      },
+      "TH": {
+        "2026-03-03":"萬佛節 (Makha Bucha)", "2026-05-31":"佛誕節 (Visakha Bucha)", "2026-07-29":"三寶佛節 (Asanha Bucha)",
+        "2027-02-21":"萬佛節 (Makha Bucha)", "2027-05-20":"佛誕節 (Visakha Bucha)", "2027-07-18":"三寶佛節 (Asanha Bucha)"
+      },
+      "SG": {
+        "2026-02-17":"農曆初一 (CNY)", "2026-02-18":"農曆初二 (CNY)", "2026-03-20":"開齋節 (Hari Raya Puasa)", "2026-04-03":"受難節 (Good Friday)", "2026-05-27":"哈芝節 (Hari Raya Haji)", "2026-05-31":"衛塞節 (Vesak Day)", "2026-11-08":"屠妖節 (Deepavali)",
+        "2027-02-07":"農曆初一 (CNY)", "2027-02-08":"農曆初二 (CNY)", "2027-03-10":"開齋節 (Hari Raya Puasa)", "2027-03-26":"受難節 (Good Friday)", "2027-05-17":"哈芝節 (Hari Raya Haji)", "2027-05-20":"衛塞節 (Vesak Day)", "2027-10-28":"屠妖節 (Deepavali)"
+      },
+      "UK": { "2026-04-03":"Good Friday", "2026-04-06":"Easter Monday", "2027-03-26":"Good Friday", "2027-03-29":"Easter Monday" },
+      "AU": { "2026-04-03":"Good Friday", "2026-04-06":"Easter Monday", "2027-03-26":"Good Friday", "2027-03-29":"Easter Monday" },
+      "CA": { "2026-04-03":"Good Friday", "2026-04-06":"Easter Monday", "2027-03-26":"Good Friday", "2027-03-29":"Easter Monday" }
+    };
+
+    function getCountryHolidays(country, year) {
+      const map = {};
+      const fixed = FIXED_HOLIDAYS[country] || {};
+      for (const [mmdd, name] of Object.entries(fixed)) {
+        map[`${year}-${mmdd}`] = name;
+      }
+
+      const addRelative = (month, nth, dayOfWeek, name) => {
+        const d = getNthWeekday(year, month - 1, nth, dayOfWeek);
+        if (d) map[`${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`] = name;
+      };
+
+      if (country === 'JP') {
+        addRelative(1, 2, 1, '成人の日');
+        addRelative(7, 3, 1, '海の日');
+        addRelative(9, 3, 1, '敬老の日');
+        addRelative(10, 2, 1, '體育之日 (Sports Day)');
+      } else if (country === 'US') {
+        addRelative(1, 3, 1, 'Martin Luther King Jr. Day');
+        addRelative(2, 3, 1, "Presidents' Day");
+        addRelative(5, -1, 1, 'Memorial Day');
+        addRelative(9, 1, 1, 'Labor Day (勞動節)');
+        addRelative(10, 2, 1, 'Columbus Day');
+        addRelative(11, 4, 4, 'Thanksgiving Day');
+      } else if (country === 'UK') {
+        addRelative(5, 1, 1, 'Early May Bank Holiday');
+        addRelative(5, -1, 1, 'Spring Bank Holiday');
+        addRelative(8, -1, 1, 'Summer Bank Holiday');
+      } else if (country === 'CA') {
+        addRelative(9, 1, 1, 'Labour Day (勞工節)');
+        addRelative(10, 2, 1, 'Thanksgiving');
+        const vicD = getNthWeekday(year, 4, -1, 1);
+        if (vicD) map[`${year}-05-${String(vicD).padStart(2,'0')}`] = 'Victoria Day';
+      } else if (country === 'AU') {
+        addRelative(6, 2, 1, "King's Birthday");
+        addRelative(10, 1, 1, 'Labour Day (NSW/ACT/SA 勞工節)');
+      }
+
+      const floating = (FLOATING_HOLIDAYS[country] || {});
+      for (const [dateStr, name] of Object.entries(floating)) {
+        if (dateStr.startsWith(`${year}-`)) map[dateStr] = name;
+      }
+
+      return map;
+    }
+
+    /* 日曆渲染與紅點標示 */
     const calTitle = document.getElementById('calTitle');
     const calGrid = document.getElementById('calGrid');
     const calRegionSelect = document.getElementById('calRegionSelect');
-    const legendList = document.getElementById('legendList');
+    const calInfoCard = document.getElementById('calInfoCard');
+    const calInfoText = document.getElementById('calInfoText');
     let calDate = new Date();
 
-    const HOLIDAYS = {
-      "HK": { "2026-01-01": "New Year", "2026-02-17": "Lunar NY", "2026-10-01": "National Day" },
-      "TW": { "2026-01-01": "New Year", "2026-02-16": "Lunar Eve" },
-      "JP": { "2026-01-01": "Gantan" },
-      "SG": { "2026-01-01": "New Year" },
-      "US": { "2026-01-01": "New Year", "2026-07-04": "July 4th", "2026-12-25": "Xmas" },
-      "UK": { "2026-01-01": "New Year" },
-      "AU": { "2026-01-01": "New Year", "2026-01-26": "AU Day" }
-    };
     const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
     function renderCalendar() {
       calGrid.innerHTML = '';
-      const year = calDate.getFullYear(), month = calDate.getMonth(), region = calRegionSelect.value;
+      const year = calDate.getFullYear();
+      const month = calDate.getMonth();
+      const country = calRegionSelect.value;
       calTitle.textContent = `${MONTHS[month]} ${year}`;
 
       ['S','M','T','W','T','F','S'].forEach(d => {
-        const head = document.createElement('div'); head.className = 'cal-head'; head.textContent = d; calGrid.appendChild(head);
+        const head = document.createElement('div');
+        head.className = 'cal-head';
+        head.textContent = d;
+        calGrid.appendChild(head);
       });
 
       const firstDay = new Date(year, month, 1).getDay();
       const totalDays = new Date(year, month + 1, 0).getDate();
       const prevTotal = new Date(year, month, 0).getDate();
       const today = new Date();
-      const isCurrent = today.getFullYear() === year && today.getMonth() === month;
-      const holidays = [];
+      const isCurrent = (today.getFullYear() === year && today.getMonth() === month);
+
+      const holidaysMap = getCountryHolidays(country, year);
 
       for (let i = 0; i < 35; i++) {
-        const cell = document.createElement('div'); cell.className = 'cal-day';
-        let cellYear = year, cellMonth = month, dayNum;
+        const cell = document.createElement('div');
+        cell.className = 'cal-day';
+        let cellYear = year;
+        let cellMonth = month;
+        let dayNum;
 
         if (i < firstDay) {
-          cell.classList.add('other-month'); dayNum = prevTotal - (firstDay - i - 1); cellMonth = month - 1;
+          cell.classList.add('other-month');
+          dayNum = prevTotal - (firstDay - i - 1);
+          cellMonth = month - 1;
         } else if (i >= firstDay + totalDays) {
-          cell.classList.add('other-month'); dayNum = i - (firstDay + totalDays) + 1; cellMonth = month + 1;
+          cell.classList.add('other-month');
+          dayNum = i - (firstDay + totalDays) + 1;
+          cellMonth = month + 1;
         } else {
           dayNum = i - firstDay + 1;
           if (isCurrent && dayNum === today.getDate()) cell.classList.add('today');
         }
 
         cell.textContent = dayNum;
-        const dateStr = `${cellYear}-${(cellMonth + 1).toString().padStart(2, '0')}-${dayNum.toString().padStart(2, '0')}`;
-        const regionHolidays = HOLIDAYS[region] || {};
 
-        if (regionHolidays[dateStr]) {
+        const targetD = new Date(cellYear, cellMonth, dayNum);
+        const yStr = targetD.getFullYear();
+        const mStr = String(targetD.getMonth() + 1).padStart(2, '0');
+        const dStr = String(targetD.getDate()).padStart(2, '0');
+        const dateKey = `${yStr}-${mStr}-${dStr}`;
+
+        const holidayName = holidaysMap[dateKey];
+        if (holidayName) {
           cell.classList.add('holiday');
-          const dot = document.createElement('div'); dot.className = 'holiday-dot'; cell.appendChild(dot);
-          if (cellMonth === month) holidays.push(`${dayNum}: ${regionHolidays[dateStr]}`);
+          const dot = document.createElement('div');
+          dot.className = 'holiday-dot';
+          cell.appendChild(dot);
         }
+
+        cell.addEventListener('click', () => {
+          triggerHaptic();
+          document.querySelectorAll('.cal-day').forEach(c => c.classList.remove('selected'));
+          cell.classList.add('selected');
+
+          if (holidayName) {
+            calInfoCard.style.background = 'var(--c-yellow)';
+            calInfoText.innerHTML = `<strong>${dateKey}</strong>：🎉 ${holidayName}`;
+          } else {
+            calInfoCard.style.background = '#FFF';
+            calInfoText.innerHTML = `<strong>${dateKey}</strong>：正常工作日`;
+          }
+        });
+
         calGrid.appendChild(cell);
       }
-      legendList.innerHTML = holidays.length ? holidays.map(h => `🎉 ${h}`).join('<br>') : '🎉 NO HOLIDAYS';
     }
 
-    document.getElementById('calPrevBtn').addEventListener('click', () => { calDate.setMonth(calDate.getMonth() - 1); renderCalendar(); });
-    document.getElementById('calNextBtn').addEventListener('click', () => { calDate.setMonth(calDate.getMonth() + 1); renderCalendar(); });
-    calRegionSelect.addEventListener('change', renderCalendar);
+    document.getElementById('calPrevBtn').addEventListener('click', () => {
+      triggerHaptic();
+      calDate.setMonth(calDate.getMonth() - 1);
+      renderCalendar();
+    });
+    document.getElementById('calNextBtn').addEventListener('click', () => {
+      triggerHaptic();
+      calDate.setMonth(calDate.getMonth() + 1);
+      renderCalendar();
+    });
+    calRegionSelect.addEventListener('change', () => {
+      triggerHaptic();
+      renderCalendar();
+    });
     renderCalendar();
 
     /* Calculator & Drops */
@@ -1369,122 +1713,597 @@
       triggerHaptic(); dropStage.innerHTML = ''; dropCountTag.textContent = 'Count: 0';
     });
 
-    /* Snake Game Logic */
-    const canvas = document.getElementById('snakeCanvas');
-    const ctx = canvas.getContext('2d');
-    const snakeScore = document.getElementById('snakeScore');
-    const snakeOverlay = document.getElementById('snakeOverlay');
-    const snakeOverlayText = document.getElementById('snakeOverlayText');
+    /* ==========================================================================
+       GAME 1: 2048 PUZZLE CORE LOGIC
+       ========================================================================== */
+    const boardEl = document.getElementById('g2048Board');
+    const scoreEl = document.getElementById('g2048Score');
+    const bestEl = document.getElementById('g2048Best');
+    const overlayEl = document.getElementById('g2048Overlay');
+    const overlayTextEl = document.getElementById('g2048OverlayText');
 
-    const GRID = 14;
-    const TILE = canvas.width / GRID;
-    let snake = [], food = {}, dir = {x:1, y:0}, nextDir = {x:1, y:0};
-    let score = 0, gameInterval = null, isRunning = false;
+    let board = [];
+    let score2048 = 0;
+    let bestScore = parseInt(localStorage.getItem('wb_2048_best') || '0', 10);
+    bestEl.textContent = `BEST: ${bestScore}`;
 
-    function initSnake() {
-      snake = [{x:4, y:7}, {x:3, y:7}, {x:2, y:7}];
-      dir = {x:1, y:0}; nextDir = {x:1, y:0};
-      score = 0; updateScore(); spawnFood(); drawGame();
+    function init2048() {
+      board = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+      ];
+      score2048 = 0;
+      update2048Score(0);
+      overlayEl.classList.add('hidden');
+      addRandomTile();
+      addRandomTile();
+      render2048();
     }
-    function updateScore() { snakeScore.textContent = `SCORE: ${score}`; }
-    function spawnFood() {
-      food = { x: Math.floor(Math.random() * GRID), y: Math.floor(Math.random() * GRID) };
-    }
-    function startGame() {
-      triggerHaptic();
-      if (isRunning) return;
-      initSnake(); isRunning = true;
-      snakeOverlay.classList.add('hidden');
-      if (gameInterval) clearInterval(gameInterval);
-      gameInterval = setInterval(stepGame, 160);
-    }
-    function gameOver() {
-      isRunning = false; clearInterval(gameInterval);
-      snakeOverlayText.textContent = `SCORE: ${score}`;
-      snakeOverlay.classList.remove('hidden');
-    }
-    function stepGame() {
-      dir = nextDir;
-      const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
-      if (head.x < 0 || head.x >= GRID || head.y < 0 || head.y >= GRID || snake.some(s => s.x === head.x && s.y === head.y)) {
-        return gameOver();
+
+    function update2048Score(add) {
+      score2048 += add;
+      scoreEl.textContent = `SCORE: ${score2048}`;
+      if (score2048 > bestScore) {
+        bestScore = score2048;
+        localStorage.setItem('wb_2048_best', bestScore);
+        bestEl.textContent = `BEST: ${bestScore}`;
       }
-      snake.unshift(head);
-      if (head.x === food.x && head.y === food.y) {
-        score += 10; updateScore(); spawnFood();
-      } else { snake.pop(); }
-      drawGame();
-    }
-    function drawGame() {
-      ctx.fillStyle = '#1A1A24';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#FF477E';
-      ctx.fillRect(food.x * TILE + 2, food.y * TILE + 2, TILE - 4, TILE - 4);
-
-      snake.forEach((seg, idx) => {
-        ctx.fillStyle = idx === 0 ? '#06D6A0' : '#118AB2';
-        ctx.fillRect(seg.x * TILE + 1, seg.y * TILE + 1, TILE - 2, TILE - 2);
-      });
-    }
-    function changeDir(dx, dy) {
-      if (dx === -dir.x && dx !== 0) return;
-      if (dy === -dir.y && dy !== 0) return;
-      nextDir = {x: dx, y: dy};
     }
 
-    ['dpadUp', 'dpadDown', 'dpadLeft', 'dpadRight'].forEach((id, idx) => {
-      const dirs = [{x:0,y:-1}, {x:0,y:1}, {x:-1,y:0}, {x:1,y:0}];
-      document.getElementById(id).addEventListener('click', () => {
-        triggerHaptic(); if (!isRunning) startGame();
-        changeDir(dirs[idx].x, dirs[idx].y);
+    function addRandomTile() {
+      const emptyCells = [];
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 4; c++) {
+          if (board[r][c] === 0) emptyCells.push({ r, c });
+        }
+      }
+      if (emptyCells.length === 0) return;
+      const { r, c } = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+      board[r][c] = Math.random() < 0.9 ? 2 : 4;
+    }
+
+    function render2048() {
+      boardEl.innerHTML = '';
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 4; c++) {
+          const val = board[r][c];
+          const cell = document.createElement('div');
+          cell.className = 'g2048-cell';
+          if (val > 0) {
+            cell.dataset.val = val;
+            cell.textContent = val;
+          }
+          boardEl.appendChild(cell);
+        }
+      }
+    }
+
+    function slideRow(row) {
+      let filtered = row.filter(val => val !== 0);
+      let gained = 0;
+      for (let i = 0; i < filtered.length - 1; i++) {
+        if (filtered[i] === filtered[i + 1]) {
+          filtered[i] *= 2;
+          gained += filtered[i];
+          filtered.splice(i + 1, 1);
+        }
+      }
+      while (filtered.length < 4) filtered.push(0);
+      return { newRow: filtered, gained };
+    }
+
+    function rotateBoard(matrix) {
+      return matrix[0].map((_, index) => matrix.map(row => row[index]).reverse());
+    }
+
+    function move2048(direction) {
+      let current = JSON.parse(JSON.stringify(board));
+      let rotated = current;
+      let totalGained = 0;
+
+      for (let i = 0; i < direction; i++) {
+        rotated = rotateBoard(rotated);
+      }
+
+      for (let r = 0; r < 4; r++) {
+        const { newRow, gained } = slideRow(rotated[r]);
+        rotated[r] = newRow;
+        totalGained += gained;
+      }
+
+      for (let i = 0; i < (4 - direction) % 4; i++) {
+        rotated = rotateBoard(rotated);
+      }
+
+      const changed = JSON.stringify(board) !== JSON.stringify(rotated);
+      if (changed) {
+        triggerHaptic();
+        playClickSound();
+        board = rotated;
+        update2048Score(totalGained);
+        addRandomTile();
+        render2048();
+
+        if (totalGained >= 2048 && typeof fireConfetti === 'function') {
+          fireConfetti();
+        }
+
+        if (isGameOver()) {
+          overlayTextEl.textContent = 'GAME OVER';
+          overlayEl.classList.remove('hidden');
+        }
+      }
+    }
+
+    function isGameOver() {
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 4; c++) {
+          if (board[r][c] === 0) return false;
+          if (c < 3 && board[r][c] === board[r][c + 1]) return false;
+          if (r < 3 && board[r][c] === board[r + 1][c]) return false;
+        }
+      }
+      return true;
+    }
+
+    document.getElementById('btn2048Left').addEventListener('click', () => move2048(0));
+    document.getElementById('btn2048Down').addEventListener('click', () => move2048(1));
+    document.getElementById('btn2048Right').addEventListener('click', () => move2048(2));
+    document.getElementById('btn2048Up').addEventListener('click', () => move2048(3));
+
+    let touchStartX = 0, touchStartY = 0;
+    boardEl.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    boardEl.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
+
+      if (Math.max(absDx, absDy) > 20) {
+        if (absDx > absDy) {
+          move2048(dx > 0 ? 2 : 0);
+        } else {
+          move2048(dy > 0 ? 1 : 3);
+        }
+      }
+    }, { passive: true });
+
+    document.getElementById('g2048RestartBtn').addEventListener('click', () => { triggerHaptic(); playClickSound(); init2048(); });
+    document.getElementById('g2048StartBtn').addEventListener('click', () => { triggerHaptic(); playClickSound(); init2048(); });
+
+    init2048();
+
+    /* ==========================================================================
+       GAME 2: MINER 9-STAGES CORE LOGIC
+       ========================================================================== */
+    const STAGE_CONFIGS = [
+      { level: 1, target: 450,  time: 20 },
+      { level: 2, target: 650,  time: 20 },
+      { level: 3, target: 900,  time: 18 },
+      { level: 4, target: 1200, time: 18 },
+      { level: 5, target: 1500, time: 18 },
+      { level: 6, target: 1850, time: 16 },
+      { level: 7, target: 2200, time: 16 },
+      { level: 8, target: 2600, time: 15 },
+      { level: 9, target: 3000, time: 15 }
+    ];
+
+    const VICTORY_MESSAGES = [
+      { title: "🎉 CONGRATS, BILLIONAIRE!", desc: "You made a fortune! Time to enjoy total financial freedom." },
+      { title: "🏖️ RETIRED & RICH!", desc: "Pack your bags! You are financially free and officially retired." },
+      { title: "🥂 FINANCIAL FREEDOM!", desc: "You're filthy rich! Never have to work another day in your life." },
+      { title: "💎 WELCOME TO THE 1%!", desc: "Ultimate wealth unlocked! Live your best retired billionaire life." }
+    ];
+
+    let currentStageIdx = 0;
+    let minerScore = 0;
+    let minerTimeLeft = 20;
+    let minerTimerId = null;
+    let isMinerRunning = false;
+
+    const minerOrigin = { x: 150, y: 22 };
+    let hookAngle = 0;
+    let angleDir = 1;
+    let hookLen = 18;
+    const minHookLen = 18;
+    let hookState = 'SWING';
+    let caughtMineral = null;
+
+    let minerals = [];
+    let minerScorePops = [];
+
+    const minerCanvas = document.getElementById('minerCanvas');
+    const minerCtx = minerCanvas.getContext('2d');
+    const minerCanvasWrap = document.getElementById('minerCanvasWrap');
+
+    const mStageBadge = document.getElementById('mStageBadge');
+    const mScoreBadge = document.getElementById('mScoreBadge');
+    const mTargetBadge = document.getElementById('mTargetBadge');
+    const mTimerBadge = document.getElementById('mTimerBadge');
+    const mOverlay = document.getElementById('mOverlay');
+    const mOverlayTitle = document.getElementById('mOverlayTitle');
+    const mOverlayDesc = document.getElementById('mOverlayDesc');
+    const mActionBtn = document.getElementById('mActionBtn');
+    const mRestartBtn = document.getElementById('mRestartBtn');
+    const mNextStageBtn = document.getElementById('mNextStageBtn');
+
+    function updateMinerNextButton() {
+      const cfg = STAGE_CONFIGS[currentStageIdx];
+      if (minerScore >= cfg.target) {
+        mNextStageBtn.disabled = false;
+        mNextStageBtn.style.opacity = '1';
+      } else {
+        mNextStageBtn.disabled = true;
+        mNextStageBtn.style.opacity = '0.55';
+      }
+    }
+
+    function buildMinerals(level) {
+      const items = [];
+      items.push({ x: 50, y: 120, r: 9, type: 'diamond', val: 500, weight: 1, col: '#00BA88' });
+      items.push({ x: 250, y: 130, r: 9, type: 'diamond', val: 500, weight: 1, col: '#00BA88' });
+      items.push({ x: 150, y: 165, r: 13, type: 'gold_s', val: 120, weight: 1.4, col: '#FFB800' });
+      items.push({ x: 85, y: 235, r: 23, type: 'gold_l', val: 350, weight: 3.4, col: '#FFB800' });
+
+      if (level >= 2) {
+        items.push({ x: 150, y: 250, r: 24, type: 'rock', val: 20, weight: 4.5, col: '#8A8275' });
+        items.push({ x: 225, y: 205, r: 17, type: 'rock', val: 15, weight: 3.2, col: '#8A8275' });
+      }
+      if (level >= 3) {
+        items.push({ x: 198, y: 138, r: 13, type: 'gold_s', val: 150, weight: 1.3, col: '#FFB800' });
+      }
+      if (level >= 4) {
+        items.push({ x: 65, y: 180, r: 9, type: 'diamond', val: 500, weight: 1, col: '#00BA88' });
+        items.push({ x: 108, y: 128, r: 19, type: 'rock', val: 18, weight: 3.5, col: '#8A8275' });
+      }
+      if (level >= 5) {
+        items.push({ x: 105, y: 215, r: 10, type: 'diamond', val: 500, weight: 1, col: '#00BA88' });
+      }
+      if (level >= 6) {
+        items.push({ x: 255, y: 255, r: 24, type: 'gold_l', val: 380, weight: 3.5, col: '#FFB800' });
+        items.push({ x: 32, y: 230, r: 20, type: 'rock', val: 15, weight: 4.0, col: '#8A8275' });
+      }
+      if (level >= 7) {
+        items.push({ x: 150, y: 102, r: 9, type: 'diamond', val: 500, weight: 1, col: '#00BA88' });
+        items.push({ x: 188, y: 255, r: 22, type: 'rock', val: 25, weight: 4.2, col: '#8A8275' });
+      }
+      if (level >= 8) {
+        items.push({ x: 55, y: 100, r: 10, type: 'diamond', val: 500, weight: 1, col: '#00BA88' });
+        items.push({ x: 240, y: 100, r: 13, type: 'gold_s', val: 150, weight: 1.2, col: '#FFB800' });
+      }
+      if (level >= 9) {
+        items.push({ x: 150, y: 278, r: 11, type: 'diamond', val: 600, weight: 1, col: '#00BA88' });
+        items.push({ x: 118, y: 175, r: 21, type: 'gold_l', val: 400, weight: 3.0, col: '#FFB800' });
+      }
+      return items;
+    }
+
+    function startMinerStage(stageIdx, keepScore = false) {
+      currentStageIdx = stageIdx;
+      const cfg = STAGE_CONFIGS[currentStageIdx];
+      
+      if (!keepScore) minerScore = 0;
+      minerTimeLeft = cfg.time;
+      hookAngle = 0;
+      angleDir = 1;
+      hookLen = minHookLen;
+      hookState = 'SWING';
+      caughtMineral = null;
+      minerScorePops = [];
+
+      minerals = buildMinerals(cfg.level);
+
+      mStageBadge.textContent = `LV ${cfg.level}/9`;
+      mScoreBadge.textContent = `💰 ${minerScore}`;
+      mTargetBadge.textContent = `🎯 ${cfg.target}`;
+      mTimerBadge.textContent = `⏳ ${minerTimeLeft}s`;
+      mOverlay.classList.add('hidden');
+
+      updateMinerNextButton();
+
+      if (minerTimerId) clearInterval(minerTimerId);
+      minerTimerId = setInterval(() => {
+        if (!isMinerRunning) return;
+        minerTimeLeft--;
+        mTimerBadge.textContent = `⏳ ${minerTimeLeft}s`;
+        if (minerTimeLeft <= 0) {
+          handleMinerStageEnd();
+        }
+      }, 1000);
+
+      isMinerRunning = true;
+    }
+
+    function goToNextMinerStage() {
+      const cfg = STAGE_CONFIGS[currentStageIdx];
+      if (minerScore < cfg.target) return;
+
+      if (currentStageIdx >= STAGE_CONFIGS.length - 1) {
+        handleMinerStageEnd();
+      } else {
+        startMinerStage(currentStageIdx + 1, true);
+      }
+    }
+
+    function handleMinerStageEnd() {
+      isMinerRunning = false;
+      clearInterval(minerTimerId);
+      const cfg = STAGE_CONFIGS[currentStageIdx];
+
+      if (minerScore >= cfg.target) {
+        if (currentStageIdx >= STAGE_CONFIGS.length - 1) {
+          const cheer = VICTORY_MESSAGES[Math.floor(Math.random() * VICTORY_MESSAGES.length)];
+          mOverlayTitle.textContent = cheer.title;
+          mOverlayDesc.textContent = `${cheer.desc} (Total: 💰${minerScore})`;
+          mActionBtn.textContent = "PLAY AGAIN ↺";
+          mActionBtn.onclick = () => startMinerStage(0, false);
+          fireConfetti();
+        } else {
+          mOverlayTitle.textContent = `STAGE ${cfg.level} CLEAR!`;
+          mOverlayDesc.textContent = `Target: 🎯${cfg.target} | Score: 💰${minerScore}`;
+          mActionBtn.textContent = "NEXT LEVEL";
+          mActionBtn.onclick = () => startMinerStage(currentStageIdx + 1, true);
+        }
+      } else {
+        mOverlayTitle.textContent = "STAGE FAILED";
+        mOverlayDesc.textContent = `Score: 💰${minerScore} / Target: 🎯${cfg.target}`;
+        mActionBtn.textContent = "RETRY ↺";
+        mActionBtn.onclick = () => startMinerStage(currentStageIdx, false);
+      }
+      mOverlay.classList.remove('hidden');
+    }
+
+    function launchHook() {
+      if (!isMinerRunning || hookState !== 'SWING') return;
+      triggerHaptic(10);
+      playTone(600, 'sine', 0.05);
+      hookState = 'DROP';
+    }
+
+    let hookX = 150, hookY = 40;
+
+    function updateMiner() {
+      if (hookState === 'SWING') {
+        hookAngle += 0.045 * angleDir;
+        if (hookAngle > 1.15) { hookAngle = 1.15; angleDir = -1; }
+        else if (hookAngle < -1.15) { hookAngle = -1.15; angleDir = 1; }
+      } else if (hookState === 'DROP') {
+        hookLen += 6.5;
+        hookX = minerOrigin.x + Math.sin(hookAngle) * hookLen;
+        hookY = minerOrigin.y + Math.cos(hookAngle) * hookLen;
+
+        if (hookX < 0 || hookX > 300 || hookY > 300) {
+          hookState = 'PULL';
+        }
+
+        for (let i = minerals.length - 1; i >= 0; i--) {
+          const item = minerals[i];
+          const dist = Math.hypot(hookX - item.x, hookY - item.y);
+          if (dist < item.r + 5) {
+            triggerHaptic(15);
+            playTone(850, 'triangle', 0.04);
+            caughtMineral = item;
+            minerals.splice(i, 1);
+            hookState = 'PULL';
+            break;
+          }
+        }
+      } else if (hookState === 'PULL') {
+        let pullSpeed = 6.2;
+        if (caughtMineral) {
+          pullSpeed = Math.max(1.8, 8.0 / caughtMineral.weight);
+        }
+        hookLen -= pullSpeed;
+        hookX = minerOrigin.x + Math.sin(hookAngle) * hookLen;
+        hookY = minerOrigin.y + Math.cos(hookAngle) * hookLen;
+
+        if (hookLen <= minHookLen) {
+          hookLen = minHookLen;
+          hookState = 'SWING';
+          if (caughtMineral) {
+            minerScore += caughtMineral.val;
+            mScoreBadge.textContent = `💰 ${minerScore}`;
+            updateMinerNextButton();
+            minerScorePops.push({
+              x: minerOrigin.x, y: minerOrigin.y + 16,
+              text: `+${caughtMineral.val}`,
+              col: caughtMineral.col,
+              life: 25
+            });
+            caughtMineral = null;
+          }
+        }
+      }
+    }
+
+    function renderMiner() {
+      minerCtx.clearRect(0, 0, 300, 300);
+
+      // 礦區背景
+      minerCtx.fillStyle = '#FFF9E6';
+      minerCtx.fillRect(0, 0, 300, 300);
+
+      // 礦層紋理
+      minerCtx.strokeStyle = '#EBDDB5';
+      minerCtx.lineWidth = 1.5;
+      for (let y = 45; y < 300; y += 32) {
+        minerCtx.beginPath();
+        minerCtx.moveTo(0, y);
+        minerCtx.lineTo(300, y);
+        minerCtx.stroke();
+      }
+
+      // 頂部滑輪
+      minerCtx.fillStyle = '#FFAA00';
+      minerCtx.beginPath();
+      minerCtx.arc(minerOrigin.x, minerOrigin.y, 7, 0, Math.PI * 2);
+      minerCtx.fill();
+      minerCtx.strokeStyle = '#2B261F';
+      minerCtx.lineWidth = 2.5;
+      minerCtx.stroke();
+
+      // 礦物繪製
+      minerals.forEach(item => {
+        minerCtx.save();
+        minerCtx.fillStyle = item.col;
+        minerCtx.strokeStyle = '#2B261F';
+        minerCtx.lineWidth = 2.5;
+
+        if (item.type === 'diamond') {
+          minerCtx.beginPath();
+          minerCtx.arc(item.x, item.y, item.r, 0, Math.PI * 2);
+          minerCtx.fill();
+          minerCtx.stroke();
+          minerCtx.fillStyle = '#FFF';
+          minerCtx.fillRect(item.x - 2, item.y - 2, 4, 4);
+        } else {
+          minerCtx.beginPath();
+          minerCtx.arc(item.x, item.y, item.r, 0, Math.PI * 2);
+          minerCtx.fill();
+          minerCtx.stroke();
+        }
+        minerCtx.restore();
       });
+
+      // 鋼索
+      hookX = minerOrigin.x + Math.sin(hookAngle) * hookLen;
+      hookY = minerOrigin.y + Math.cos(hookAngle) * hookLen;
+      minerCtx.strokeStyle = '#996515';
+      minerCtx.lineWidth = 2.5;
+      minerCtx.beginPath();
+      minerCtx.moveTo(minerOrigin.x, minerOrigin.y);
+      minerCtx.lineTo(hookX, hookY);
+      minerCtx.stroke();
+
+      // 鐵爪
+      minerCtx.save();
+      minerCtx.translate(hookX, hookY);
+      minerCtx.rotate(-hookAngle);
+      minerCtx.strokeStyle = '#2B261F';
+      minerCtx.lineWidth = 3;
+      minerCtx.lineCap = 'round';
+      minerCtx.beginPath();
+      minerCtx.moveTo(-6, -2);
+      minerCtx.lineTo(0, 7);
+      minerCtx.lineTo(6, -2);
+      minerCtx.stroke();
+      minerCtx.restore();
+
+      // 抓回來的物品
+      if (caughtMineral) {
+        minerCtx.save();
+        minerCtx.fillStyle = caughtMineral.col;
+        minerCtx.strokeStyle = '#2B261F';
+        minerCtx.lineWidth = 2.5;
+        minerCtx.beginPath();
+        minerCtx.arc(hookX, hookY + caughtMineral.r / 2, caughtMineral.r, 0, Math.PI * 2);
+        minerCtx.fill();
+        minerCtx.stroke();
+        minerCtx.restore();
+      }
+
+      // 加分特效
+      minerScorePops.forEach(sp => {
+        sp.y -= 0.8;
+        sp.life--;
+        minerCtx.font = '900 16px Impact';
+        minerCtx.fillStyle = '#FF5500';
+        minerCtx.strokeStyle = '#FFFFFF';
+        minerCtx.lineWidth = 3;
+        minerCtx.textAlign = 'center';
+        minerCtx.strokeText(sp.text, sp.x, sp.y);
+        minerCtx.fillText(sp.text, sp.x, sp.y);
+      });
+      minerScorePops = minerScorePops.filter(sp => sp.life > 0);
+    }
+
+    function minerLoop() {
+      updateMiner();
+      renderMiner();
+      requestAnimationFrame(minerLoop);
+    }
+
+    // 點擊礦區畫布下爪
+    minerCanvasWrap.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      launchHook();
     });
 
-    document.getElementById('snakeStartBtn').addEventListener('click', startGame);
-    document.getElementById('snakeRestartBtn').addEventListener('click', startGame);
+    mNextStageBtn.addEventListener('click', goToNextMinerStage);
+    mRestartBtn.addEventListener('click', () => startMinerStage(currentStageIdx, false));
 
-    /* HK Local AI & Economy News Data & Logic */
+    // 全域按鍵事件路由
+    window.addEventListener('keydown', (e) => {
+      const isMinerActive = paneGameMiner.classList.contains('active');
+      const is2048Active = paneGame2048.classList.contains('active');
+
+      if (is2048Active) {
+        if (['ArrowLeft', 'KeyA'].includes(e.code)) { e.preventDefault(); move2048(0); }
+        else if (['ArrowDown', 'KeyS'].includes(e.code)) { e.preventDefault(); move2048(1); }
+        else if (['ArrowRight', 'KeyD'].includes(e.code)) { e.preventDefault(); move2048(2); }
+        else if (['ArrowUp', 'KeyW'].includes(e.code)) { e.preventDefault(); move2048(3); }
+      } else if (isMinerActive) {
+        if (['Space', 'ArrowDown', 'KeyS'].includes(e.code)) {
+          e.preventDefault();
+          launchHook();
+        } else if (e.code === 'KeyN') {
+          e.preventDefault();
+          goToNextMinerStage();
+        }
+      }
+    });
+
+    startMinerStage(0);
+    requestAnimationFrame(minerLoop);
+
+    /* HK Local AI & Economy News */
     const hkNewsData = [
       {
-        title: "香港数码港全力构建AI生态圈：已汇聚逾250家智慧生活及人工智能初创企业",
-        source: "香港经济日报 (HKET)",
+        title: "香港數碼港全力構建AI生態圈：已匯聚逾250家智慧生活及人工智能初創企業",
+        source: "香港經濟日報 (HKET)",
         category: "ai",
-        time: "1小时前",
+        time: "1小時前",
         url: "https://topick.hket.com/"
       },
       {
-        title: "财政司司长：特区政府正积极推动国际创新科技中心建设，加速中小企利用AI进行数码转型",
-        source: "信报财经新闻 (HKEJ)",
+        title: "財政司司長：特區政府正積極推動國際創新科技中心建設，加速中小企利用AI進行數碼轉型",
+        source: "信報財經新聞 (HKEJ)",
         category: "eco",
-        time: "3小时前",
+        time: "3小時前",
         url: "https://www2.hkej.com/"
       },
       {
-        title: "金管局联同数码港合办Generative AI银行业应用研讨会，探讨风险管理与合规挑战",
-        source: "香港电台 (RTHK)",
+        title: "金管局聯同數碼港合辦Generative AI銀行業應用研討會，探討風險管理與合規挑戰",
+        source: "香港電台 (RTHK)",
         category: "ai",
-        time: "5小时前",
+        time: "5小時前",
         url: "https://news.rthk.hk/"
       },
       {
-        title: "港交所新特专科技公司上市制度显成效，多家具备AI核心技术的企业正积极筹备赴港挂牌",
-        source: "AASTOCKS 财经",
+        title: "港交所新特專科技公司上市制度顯成效，多家具備AI核心技術的企業正積極籌備赴港掛牌",
+        source: "AASTOCKS 財經",
         category: "eco",
-        time: "6小时前",
+        time: "6小時前",
         url: "http://www.aastocks.com/"
       },
       {
-        title: "香港科技大学与本地科创企业合作成立AI联合实验室，聚焦大湾区智慧城市与数字经济",
-        source: "香港文汇报",
+        title: "香港科技大學與本地科創企業合作成立AI聯合實驗室，聚焦大灣區智慧城市與數字經濟",
+        source: "香港文匯報",
         category: "ai",
-        time: "9小时前",
+        time: "9小時前",
         url: "https://www.wenweipo.com/"
       },
       {
-        title: "香港金管局公布最新外汇基金数据，强调本地金融体系保持强韧，科技创新投资成新亮点",
-        source: "香港经济日报 (HKET)",
+        title: "香港金管局公布最新外匯基金數據，強調本地金融體系保持強韌，科技創新投資成新亮點",
+        source: "香港經濟日報 (HKET)",
         category: "eco",
-        time: "12小时前",
+        time: "12小時前",
         url: "https://topick.hket.com/"
       }
     ];
@@ -1492,16 +2311,12 @@
     function renderNews(filter = 'all') {
       const container = document.getElementById('newsContainer');
       container.innerHTML = '';
-      
       const filtered = hkNewsData.filter(item => filter === 'all' || item.category === filter);
-      
       filtered.forEach(item => {
         const card = document.createElement('div');
         card.className = 'news-card';
-        
         const tagClass = item.category === 'ai' ? 'news-tag-ai' : 'news-tag-eco';
         const tagText = item.category === 'ai' ? '🤖 AI' : '💰 ECON';
-
         card.innerHTML = `
           <div class="news-meta">
             <span class="news-source">${item.source}</span>
@@ -1510,7 +2325,7 @@
           <a class="news-title" href="${item.url}" target="_blank" rel="noopener noreferrer">${item.title}</a>
           <div style="display:flex; gap:4px; margin-top:2px;">
             <span class="news-source ${tagClass}" style="font-size:10px; padding:1px 4px;">${tagText}</span>
-            <span style="font-size:10px; color:#666; align-self:center;">🇭🇰 香港本地新闻</span>
+            <span style="font-size:10px; color:#666; align-self:center;">🇭🇰 香港本地新聞</span>
           </div>
         `;
         container.appendChild(card);
@@ -1520,18 +2335,12 @@
     document.getElementById('filterAllNews').addEventListener('click', () => { triggerHaptic(); playClickSound(); renderNews('all'); });
     document.getElementById('filterAiNews').addEventListener('click', () => { triggerHaptic(); playClickSound(); renderNews('ai'); });
     document.getElementById('filterEcoNews').addEventListener('click', () => { triggerHaptic(); playClickSound(); renderNews('eco'); });
-    
     document.getElementById('refreshNewsBtn').addEventListener('click', () => {
       triggerHaptic(); playClickSound();
-      // Simulate quick refresh animation or shuffle/re-render
       const container = document.getElementById('newsContainer');
       container.style.opacity = '0.3';
-      setTimeout(() => {
-        renderNews('all');
-        container.style.opacity = '1';
-      }, 200);
+      setTimeout(() => { renderNews('all'); container.style.opacity = '1'; }, 200);
     });
-
     renderNews('all');
 
     /* QR Code */
@@ -1558,8 +2367,6 @@
       link.href = document.getElementById('qrCanvas').toDataURL();
       link.click();
     });
-
-    initSnake();
   </script>
 </body>
 </html>
