@@ -1,4 +1,5 @@
-# The First wishes: Get more stimulus at boring work.
+<div align="center"> 
+# The First wishes: Get some colors at work.
 ![page](./image/logo.png)
 
 腦海第一圖示：彩色馬賽克，主要動作是鼠標上下滾輪，會有切頁，雛形架構就出來了。
@@ -23,3 +24,4 @@ V.2:多樣化内嵌視頻，穩定日期顯示，通用互動游戲增加互動�
 Feedback: 停止迭代，感覺摸魚不需要太多信息攝入，選擇也不需要多，功能能沒做到極度滲入，所以暫停進一步添加。
 判斷目前内容足夠使用且完成目的，節點式閉環。
 Kkp決定去學習，有更好的想法再回來更新。
+</div>
