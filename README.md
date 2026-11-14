@@ -1,5 +1,5 @@
 # The First wishes: Get more stimulus at boring work.
-![專案示範圖](./images/logo.png)
+![page](./image/logo.png)
 
 腦海第一圖示：彩色馬賽克，主要動作是鼠標上下滾輪，會有切頁，雛形架構就出來了。
 第一次并不成功，因直接一股腦表述給AI。
